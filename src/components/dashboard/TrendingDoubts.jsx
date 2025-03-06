@@ -1,40 +1,31 @@
-
 import { Button } from "@radix-ui/themes";
 import { PlusCircle } from "lucide-react";
 import DoubtCard from "./DoubtCard";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 function TrendingDoubts() {
-    const navigate = useNavigate();
-    function postdoubt() {
-      navigate("/dashboard/postdoubt")
-    }
-    const trendingDoubts = [
+  const navigate = useNavigate();
+  function postdoubt() {
+    navigate("/dashboard/postdoubt");
+  }
+  const [trendingDoubts, setTrendingDoubts] = useState([]);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const fetchTrendingDoubts = async () => {
+      const response = await axios.get(
+        "https://doubtly-backend.onrender.com/api/doubt/showAll",
         {
-          title: "Understanding React Hooks and Custom Hooks",
-          tags: ["React", "JavaScript"],
-          username: "tech_enthusiast",
-          answerCount: 5,
-          upvotes: 12,
-          timeAgo: "2h ago",
-        },
-        {
-          title: "Best practices for state management in large applications",
-          tags: ["Redux", "State Management"],
-          username: "code_master",
-          answerCount: 3,
-          upvotes: 8,
-          timeAgo: "4h ago",
-        },
-        {
-          title: "Implementing authentication with JWT",
-          tags: ["Security", "Backend"],
-          username: "security_pro",
-          answerCount: 7,
-          upvotes: 15,
-          timeAgo: "6h ago",
-        },
-      ];
-
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setTrendingDoubts(response.data.result);
+    };
+    fetchTrendingDoubts();
+  }, []);
   return (
     <>
       <section>
@@ -55,4 +46,4 @@ function TrendingDoubts() {
   );
 }
 
-export default TrendingDoubts
+export default TrendingDoubts;
