@@ -1,5 +1,5 @@
-import NavBar from "../NavBar.jsx";
-import MainComponent from "./maincomponent";
+import NavBar from "../components/NavBar";
+import MainComponent from "../components/postdoubt/maincomponent";
 import axios from "axios";
 import { useRef } from "react";
 export default function PostDoubt() {

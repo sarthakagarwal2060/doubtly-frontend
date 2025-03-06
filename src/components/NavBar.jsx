@@ -1,9 +1,16 @@
+import React, { useState } from "react";
 import { Search, Bell, Menu, ChevronLeft } from "lucide-react";
 import { DropdownMenu, Button, Avatar } from "@radix-ui/themes";
 import { useNavigate } from "react-router-dom";
 
 function NavBar({searchBar}) {
   const navigate = useNavigate();
+  const [logout, setLogout] = useState(false);
+  const Logout = ()=> {
+    setLogout(true) ;
+    localStorage.removeItem("token");
+    navigate("/");
+  } ;
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between bg-primary px-4 border-b border-borderColor">
@@ -61,7 +68,7 @@ function NavBar({searchBar}) {
               <DropdownMenu.Separator />
               <DropdownMenu.Item className="hover:bg-gray-100 hover:text-black">Share</DropdownMenu.Item>
               <DropdownMenu.Separator />
-              <DropdownMenu.Item color="red">Log Out</DropdownMenu.Item>
+              <DropdownMenu.Item color="red" onClick={Logout}>Log Out</DropdownMenu.Item>
             </DropdownMenu.Content>
           </DropdownMenu.Root>
         </div>

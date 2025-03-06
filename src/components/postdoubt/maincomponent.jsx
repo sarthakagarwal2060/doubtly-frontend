@@ -40,4 +40,3 @@ export default function MainComponent({titleRef, descriptionRef, categoryRef}) {
   );
 }
 
-
