@@ -32,7 +32,7 @@ export default function PostDoubt() {
   return (
     <>
       <div className="flex flex-col min-h-screen bg-gray-400 relative">
-        <NavBar searchBar={false} />
+        <NavBar doubtly={false} searchBar={false} notification={true} profile={true}/>
         <div className="container mt-20">
           <MainComponent titleRef={titleRef} descriptionRef={descriptionRef} categoryRef={categoryRef} />
         </div>

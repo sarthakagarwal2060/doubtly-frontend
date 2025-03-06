@@ -3,6 +3,7 @@ import { Button } from "@radix-ui/themes";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useRef } from "react";
+import NavBar from "../components/NavBar";
 
 function Signup() {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ function Signup() {
   }
   return (
     <>
+      <NavBar doubtly={true} searchBar={false} notification={false} profile={false} />
       <div className="flex flex-col items-center justify-center min-h-screen gap-2 bg-primary">
         <div className="border-2 flex flex-col w-[360px] px-10 py-10 rounded-lg bg-[#e6f2ff]">
           <h1 className="text-center text-3xl font-bold mb-2">SIGN UP</h1>
