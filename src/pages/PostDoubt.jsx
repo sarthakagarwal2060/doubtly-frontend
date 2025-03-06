@@ -1,4 +1,4 @@
-import NavBar from "../NavBar.jsx";
+import NavBar from "../components/NavBar";
 import MainComponent from "./maincomponent";
 import axios from "axios";
 import { useRef } from "react";

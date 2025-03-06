@@ -2,7 +2,7 @@ import HeadingOfSection from "./headingofsection";
 import Category from "./Category";
 import { useRef } from "react";
 import axios from "axios";
-import { handleSubmit } from "./PostDoubt";
+import { handleSubmit } from "../../pages/PostDoubt";
 
 export default function MainComponent({
   titleRef,
