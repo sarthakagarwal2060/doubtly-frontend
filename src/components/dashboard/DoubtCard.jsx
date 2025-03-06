@@ -10,7 +10,7 @@ function DoubtCard({ title, tags, username, answerCount, upvotes, timeAgo, class
         <div className="space-y-2 p-3 pb-6">
           <div className="flex gap-2">
             {tags.map((tag) => (
-              <Badge key={tag} radius="full" className="text-xs p-24">
+              <Badge key={tag} radius="full" className={`text-xs p-24 ${tag==="ai/ml"? "uppercase" : "capitalize"}`}>
                 {tag}
               </Badge>
             ))}
