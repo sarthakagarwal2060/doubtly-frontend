@@ -6,7 +6,8 @@ import Signup from "./pages/Signup";
 import PostDoubt from "./pages/PostDoubt";
 import Dashboard from "./pages/Dashboard";
 import MyDoubts from "./pages/MyDoubts";
-import NotFound from "./pages/NotFound"
+import NotFound from "./pages/NotFound";
+import Leaderboard from "./pages/Leaderboard";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       {/* <Dashboard /> */}
       {/* <PostDoubt /> */}
       {/* <MyDoubts /> */}
+      {/* <Leaderboard />*/}
 
       <Routes>
         <Route path="/" element={<Landing />} />
@@ -26,6 +28,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/postdoubt" element={<PostDoubt />} />
         <Route path="/dashboard/mydoubts" element={<MyDoubts />} />
+        <Route path="/dashboard/leaderboard" element={<Leaderboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
