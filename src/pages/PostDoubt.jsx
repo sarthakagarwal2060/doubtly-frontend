@@ -18,7 +18,7 @@ export default function PostDoubt() {
         {
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2N2JhMDQwNWUxYWNlOWRkZGEzZjU1NjAiLCJpYXQiOjE3NDA0MDE3ODQsImV4cCI6MTc0MDQwNTM4NH0.NH0ciJjFQ-FVLsNDyvy07D5oso85t6JpQnkXcgwezZQ`,
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
