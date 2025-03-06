@@ -1,10 +1,10 @@
-import "./App.css";
+import "./styles/App.css";
 import "@radix-ui/themes/styles.css";
-import Landing from "./components/Landing/Landing";
-import PostDoubt from "./components/postdoubt/PostDoubt";
-import Dashboard from "./components/dashboard/Dashboard";
-import Signup from "./components/LogIn-SignUp/Signup";
-import Login from "./components/LogIn-SignUp/Login";
+import Landing from "./pages/Landing";
+import PostDoubt from "./pages/PostDoubt";
+import Dashboard from "./pages/Dashboard";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
 import { Routes, Route } from "react-router-dom";
 
 function App() {

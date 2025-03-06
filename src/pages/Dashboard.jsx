@@ -1,10 +1,10 @@
-import NavBar from "../NavBar";
-import SideBar from "../SideBar";
-import WelcomeSec from "./WelcomeSec";
-import Stats from "./Stats";
-import TrendingDoubts from "./TrendingDoubts";
-import LatestDoubts from "./LatestDoubts";
-import LeaderBoard from "./LeaderBoard";
+import NavBar from "../components/NavBar";
+import SideBar from "../components/SideBar";
+import WelcomeSec from "../components/dashboard/WelcomeSec";
+import Stats from "../components/dashboard/Stats";
+import TrendingDoubts from "../components/dashboard/TrendingDoubts";
+import LatestDoubts from "../components/dashboard/LatestDoubts";
+import LeaderBoard from "../components/dashboard/LeaderBoard";
 export default function Dashboard() {
   return (
     <>
