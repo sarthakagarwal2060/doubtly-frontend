@@ -38,8 +38,8 @@ function SideBar() {
                 <Link to={item.href}>
                   <button
                     key={item.label}
-                    className={`flex gap-2 items-center w-full px-3 py-2 pt-4 text-black hover:bg-[#f0f5f9] rounded-md ${
-                      isActive(item.href) ? "bg-[#ebf0fd]" : ""
+                    className={`flex gap-2 items-center w-full px-3 py-2 pt-4 text-black hover:bg-[rgba(224,238,251,0.3)] rounded-md ${
+                      isActive(item.href) ? "bg-[#e0eefb]" : ""
                     }`}
                   >
                     <item.icon className="mr-2 h-4 w-4 text-black" />

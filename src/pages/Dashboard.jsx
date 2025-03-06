@@ -8,7 +8,7 @@ import LeaderBoard from "../components/dashboard/LeaderBoard";
 export default function Dashboard() {
   return (
     <>
-      <NavBar searchBar={true} />
+      <NavBar doubtly={true} searchBar={true} notification={true} profile={true}/>
       <SideBar />
       <main className="pt-16 pl-72 pr-8 bg-primary">
         <div className="container py-6 space-y-8 ">

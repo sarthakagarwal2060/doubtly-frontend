@@ -35,7 +35,7 @@ const myDoubts = [
 function MyDoubts() {
   return (
     <>
-      <NavBar searchBar={true} />
+      <NavBar doubtly={true} searchBar={true} notification={true} profile={true}/>
       <SideBar />
       <main className="pt-16 pl-72 pr-8 h-screen bg-primary ">
         <div className="container py-6 space-y-8 ">
@@ -46,12 +46,9 @@ function MyDoubts() {
                 My Doubts
               </h1>
             </div>
-            <Select.Root defaultValue="all" size="3">
-              <Select.Trigger
-                className="w-[160px]"
-                placeholder="Filter doubts"
-              ></Select.Trigger>
-              <Select.Content>
+            <Select.Root defaultValue="all" size="3" radius="large">
+              <Select.Trigger className="w-[160px]" placeholder="Filter doubts" ></Select.Trigger>
+              <Select.Content color="blue">
                 <Select.Item value="all">All Doubts</Select.Item>
                 <Select.Item value="unanswered">Unanswered</Select.Item>
                 <Select.Item value="resolved">Resolved</Select.Item>
