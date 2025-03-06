@@ -2,7 +2,7 @@ import NavBar from "../components/NavBar";
 import MainComponent from "../components/postdoubt/maincomponent";
 import axios from "axios";
 import { useRef } from "react";
-
+import SideBar from "../components/SideBar";
 // Separate the handleSubmit function from the component
 export const handleSubmit = async (titleRef, descriptionRef, categoryRef) => {
   try {
@@ -38,16 +38,17 @@ export default function PostDoubt() {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen bg-gray-100 relative">
+      <div className="flex flex-col min-h-screen bg-gray-100">
         <NavBar searchBar={false} />
-        <div className="container mt-20 flex-grow">
-          <MainComponent
-            titleRef={titleRef}
-            descriptionRef={descriptionRef}
-            categoryRef={categoryRef}
-          />
-        </div>
-        <div className="absolute bottom-8 right-8">
+        <div className="flex flex-row flex-grow">
+          <SideBar className="w-1/4" />
+          <div className="container mx-auto pt-24 pb-10 px-4 flex-grow">
+            <MainComponent
+              titleRef={titleRef}
+              descriptionRef={descriptionRef}
+              categoryRef={categoryRef}
+            />
+          </div>
         </div>
       </div>
     </>
