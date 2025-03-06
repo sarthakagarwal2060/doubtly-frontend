@@ -1,10 +1,12 @@
 import "./styles/App.css";
 import "@radix-ui/themes/styles.css";
 import Landing from "./pages/Landing";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import PostDoubt from "./pages/PostDoubt";
 import Dashboard from "./pages/Dashboard";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
+import MyDoubts from "./pages/MyDoubts";
+import NotFound from "./pages/NotFound"
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -15,6 +17,7 @@ function App() {
       {/* <Signup/> */}
       {/* <Dashboard /> */}
       {/* <PostDoubt /> */}
+      {/* <MyDoubts /> */}
 
       <Routes>
         <Route path="/" element={<Landing />} />
@@ -22,6 +25,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/postdoubt" element={<PostDoubt />} />
+        <Route path="/dashboard/mydoubts" element={<MyDoubts />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

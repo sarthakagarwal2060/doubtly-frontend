@@ -2,8 +2,12 @@
 import { Button } from "@radix-ui/themes";
 import { PlusCircle } from "lucide-react";
 import DoubtCard from "./DoubtCard";
-
+import { useNavigate } from "react-router-dom";
 function TrendingDoubts() {
+    const navigate = useNavigate();
+    function postdoubt() {
+      navigate("/dashboard/postdoubt")
+    }
     const trendingDoubts = [
         {
           title: "Understanding React Hooks and Custom Hooks",
@@ -36,7 +40,7 @@ function TrendingDoubts() {
       <section>
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-semibold">Trending Doubts</h2>
-          <Button color="blue" size="3" radius="large">
+          <Button color="blue" size="3" radius="large" onClick={postdoubt}>
             <PlusCircle className="mr-2 h-4 w-4" />
             Post a Doubt
           </Button>
