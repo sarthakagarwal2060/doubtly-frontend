@@ -2,10 +2,13 @@ import HeadingOfSection from "./headingofsection";
 import Category from "./Category";
 import { useRef } from "react";
 import axios from "axios";
+import { handleSubmit } from "../../pages/PostDoubt";
 
-export default function MainComponent({titleRef, descriptionRef, categoryRef}) {
- 
-  
+export default function MainComponent({
+  titleRef,
+  descriptionRef,
+  categoryRef,
+}) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="mx-auto w-2/3 p-8 bg-white shadow-lg rounded-lg">
@@ -34,9 +37,16 @@ export default function MainComponent({titleRef, descriptionRef, categoryRef}) {
         <div className="mb-6">
           <Category ref={categoryRef} />
         </div>
-      
+
+        <div className="relative h-16">
+          <button
+            className="absolute right-0 border-black border-solid border-[2px] rounded-[5px] w-[7rem] h-10 bg-cyan-100 hover:bg-cyan-200"
+            onClick={() => handleSubmit(titleRef, descriptionRef, categoryRef)}
+          >
+            Post Doubt
+          </button>
+        </div>
       </div>
     </div>
   );
 }
-
