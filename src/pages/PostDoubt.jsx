@@ -6,9 +6,9 @@ import SideBar from "../components/SideBar";
 // Separate the handleSubmit function from the component
 export const handleSubmit = async (titleRef, descriptionRef, categoryRef) => {
   try {
-    console.log("clicked");
-    console.log(titleRef.current.value);
-    console.log(titleRef.current.value, descriptionRef.current.value, categoryRef.current.value);
+    // console.log("clicked");
+    // console.log(titleRef.current.value);
+    // console.log(titleRef.current.value, descriptionRef.current.value, categoryRef.current.value);
     const token = localStorage.getItem('token')
     const res = await axios.post(
       "https://doubtly-backend.onrender.com/api/doubt/add",
@@ -38,9 +38,9 @@ export default function PostDoubt() {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen bg-gray-100">
+      <div className="flex flex-col min-h-screen bg-primary">
         <NavBar searchBar={false} />
-        <div className="flex flex-row flex-grow">
+        <div className="flex flex-row flex-grow  ">
           <SideBar className="w-1/4" />
           <div className="container mx-auto pt-24 pb-10 px-4 flex-grow">
             <MainComponent

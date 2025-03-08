@@ -1,9 +1,20 @@
 import React from 'react'
+import CompleteLeaderBoard from '../components/Leaderboard/completeLeaderBoard'
+import TopPerformer from '../components/Leaderboard/TopPerformer'
+import NavBar from '../components/NavBar'
+import SideBar from '../components/SideBar'
 
-function Leaderboard() {
+export default function Leaderboard() {
   return (
-    <div>Leaderboard</div>
+    <div className="flex flex-col min-h-screen bg-primary">
+      <NavBar searchBar={false} />
+      <div className="flex flex-row flex-grow">
+        <SideBar className="w-1/4" />
+        <div className="container mx-auto pt-24 pb-10 px-4 flex-grow pl-[12rem]">
+          <TopPerformer />
+          <CompleteLeaderBoard />
+        </div>
+      </div>
+    </div>
   )
 }
-
-export default Leaderboard
