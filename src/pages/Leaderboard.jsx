@@ -1,5 +1,5 @@
 import React from 'react'
-import CompleteLeaderBoard from '../components/Leaderboard/completeLeaderBoard'
+import CompleteLeaderBoard from '../components/Leaderboard/CompleteLeaderBoard'
 import TopPerformer from '../components/Leaderboard/TopPerformer'
 import NavBar from '../components/NavBar'
 import SideBar from '../components/SideBar'
