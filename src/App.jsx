@@ -9,7 +9,6 @@ import MyDoubts from "./pages/MyDoubts";
 import NotFound from "./pages/NotFound";
 import Leaderboard from "./pages/Leaderboard";
 import { Routes, Route } from "react-router-dom";
-import CompleteLeaderBoard from "./components/Leaderboard/completeLeaderBoard";
 
 function App() {
   return (
