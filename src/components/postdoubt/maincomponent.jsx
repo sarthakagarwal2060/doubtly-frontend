@@ -3,6 +3,7 @@ import Category from "./Category";
 import { useRef } from "react";
 import { Button, Card, Text, Box } from "@radix-ui/themes";
 import { handleSubmit } from "../../pages/PostDoubt";
+import { Button } from "@radix-ui/themes"
 
 export default function MainComponent({
   titleRef,
