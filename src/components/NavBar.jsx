@@ -52,7 +52,7 @@ function NavBar({doubtly, searchBar, notification, profile}) {
                   </div>
                 </DropdownMenu.Label>
                 <DropdownMenu.Separator />
-                <DropdownMenu.Item className="hover:bg-gray-100 hover:text-black">Profile</DropdownMenu.Item>
+                <DropdownMenu.Item className="hover:bg-gray-100 hover:text-black" onClick={()=> {navigate("/dashboard/profile")}}>Profile</DropdownMenu.Item>
                 <DropdownMenu.Item className="hover:bg-gray-100 hover:text-black">Settings</DropdownMenu.Item>
 
                 {/* <DropdownMenu.Sub>

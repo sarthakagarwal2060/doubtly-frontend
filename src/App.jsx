@@ -31,6 +31,7 @@ function App() {
         <Route path="/dashboard/mydoubts" element={<MyDoubts />} />
         <Route path="/dashboard/leaderboard" element={<Leaderboard />} />
         <Route path="/dashboard/profile" element={<Profile/>}/>
+        
         <Route path="*" element={<NotFound />} />
       </Routes>
       
