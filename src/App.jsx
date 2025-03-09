@@ -8,8 +8,9 @@ import Dashboard from "./pages/Dashboard";
 import MyDoubts from "./pages/MyDoubts";
 import NotFound from "./pages/NotFound";
 import Leaderboard from "./pages/Leaderboard";
-import { Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile";
+import { Routes, Route } from "react-router-dom";
+
 function App() {
   return (
     <>
@@ -29,7 +30,7 @@ function App() {
         <Route path="/dashboard/postdoubt" element={<PostDoubt />} />
         <Route path="/dashboard/mydoubts" element={<MyDoubts />} />
         <Route path="/dashboard/leaderboard" element={<Leaderboard />} />
-        <Route path="/dashboard/profile" element={<Profile/>} />
+        <Route path="/dashboard/profile" element={<Profile/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
       
