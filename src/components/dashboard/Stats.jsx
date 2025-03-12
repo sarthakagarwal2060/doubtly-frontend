@@ -1,7 +1,7 @@
 import { Award, MessageCircle, ThumbsUp } from "lucide-react"
 import { Card} from "@radix-ui/themes";
 
-function Stats() {
+function Stats({points}) {
   return (
     <>
       <div className="grid gap-4 grid-cols-3">
@@ -21,8 +21,8 @@ function Stats() {
             <Award className="h-4 w-4 " />
           </div>
           <div className="p-3 pt-0">
-            <div className="text-2xl font-bold">1,456</div>
-            <p className="text-xs text-textSecondary">+180 from last week</p>
+            <div className="text-2xl font-bold">{points}</div>
+            <p className="text-xs text-textSecondary">+{points} from last week</p>
           </div>
         </Card>
         <Card className="backdrop-blur-sm bg-white/30 border-borderColor shadow-sm">
