@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import Leaderboard from "./pages/Leaderboard";
 import Profile from "./pages/Profile";
 import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -26,11 +27,11 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/dashboard/postdoubt" element={<PostDoubt />} />
-        <Route path="/dashboard/mydoubts" element={<MyDoubts />} />
-        <Route path="/dashboard/leaderboard" element={<Leaderboard />} />
-        <Route path="/dashboard/profile" element={<Profile/>}/>
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/dashboard/postdoubt" element={<ProtectedRoute><PostDoubt /></ProtectedRoute>}/>
+        <Route path="/dashboard/mydoubts" element={<ProtectedRoute><MyDoubts /></ProtectedRoute>} />
+        <Route path="/dashboard/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
+        <Route path="/dashboard/profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
         
         <Route path="*" element={<NotFound />} />
       </Routes>
