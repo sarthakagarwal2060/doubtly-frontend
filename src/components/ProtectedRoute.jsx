@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
+import axios from "axios";
 
 const ProtectedRoute = ({ children }) => {
   const [isValid, setIsValid] = useState(null);
@@ -8,29 +9,55 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const validateToken = async () => {
       try {
-        console.log("Validating token:", token);
-        const response = await fetch("https://doubtly-backend.onrender.com/api/auth/check", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-        });
-        
-        console.log("Response status:", response.status);
-        console.log("Response ok:", response.ok);
-        setIsValid(response.ok);
+        const response = await axios.post(
+          "https://doubtly-backend.onrender.com/api/auth/check",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: true,
+          }
+        );
+
+        if (response.status === 200) {
+          setIsValid(true);
+        }
       } catch (error) {
-        console.error("Error validating token:", error);
-        setIsValid(false);
+        try {
+          const refreshResponse = await axios.post(
+            "https://doubtly-backend.onrender.com/api/auth/refreshToken",
+            {},
+            {
+              withCredentials: true,
+            }
+          );
+
+          if (refreshResponse.data.token) {
+            localStorage.setItem("token", refreshResponse.data.token);
+            setIsValid(true);
+          } else {
+            setIsValid(false);
+          }
+        } catch (refreshError) {
+          console.error("Error refreshing token:", refreshError);
+          localStorage.removeItem("token");
+          setIsValid(false);
+        }
       }
     };
 
-    if (token) validateToken();
-    else setIsValid(false);
+    if (token) {
+      validateToken();
+    } else {
+      setIsValid(false);
+    }
   }, [token]);
 
-  if (isValid === null) return <p>Loading...</p>; // Show loading while validating
+  if (isValid === null) {
+    return <div>Loading...</div>;
+  }
+
   return isValid ? children : <Navigate to="/login" />;
 };
 
