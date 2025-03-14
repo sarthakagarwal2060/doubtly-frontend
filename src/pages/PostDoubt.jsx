@@ -9,7 +9,7 @@ export const handleSubmit = async (titleRef, descriptionRef, categoryRef) => {
     // console.log("clicked");
     // console.log(titleRef.current.value);
     // console.log(titleRef.current.value, descriptionRef.current.value, categoryRef.current.value);
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     const res = await axios.post(
       "https://doubtly-backend.onrender.com/api/doubt/add",
       {
@@ -20,8 +20,9 @@ export const handleSubmit = async (titleRef, descriptionRef, categoryRef) => {
       {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
+        withCredentials: true,
       }
     );
     console.log(res);

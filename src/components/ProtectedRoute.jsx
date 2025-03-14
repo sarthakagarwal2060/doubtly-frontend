@@ -1,9 +1,10 @@
+import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
 import axios from "axios";
 
 const ProtectedRoute = ({ children }) => {
   const [isValid, setIsValid] = useState(null);
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -13,46 +14,52 @@ const ProtectedRoute = ({ children }) => {
           "https://doubtly-backend.onrender.com/api/auth/check",
           {},
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
             withCredentials: true,
           }
         );
-
         if (response.status === 200) {
           setIsValid(true);
         }
       } catch (error) {
-        try {
-          const refreshResponse = await axios.post(
-            "https://doubtly-backend.onrender.com/api/auth/refreshToken",
-            {},
-            {
-              withCredentials: true,
-            }
-          );
+        console.log("Token invalid or expired:", error);
+        setIsValid(false);
+        localStorage.removeItem("token");
+        navigate("/login");
+      }
+    };
 
-          if (refreshResponse.data.token) {
-            localStorage.setItem("token", refreshResponse.data.token);
-            setIsValid(true);
-          } else {
-            setIsValid(false);
-          }
-        } catch (refreshError) {
-          console.error("Error refreshing token:", refreshError);
+    const refreshToken = async () => {
+      try {
+        const response = await axios.post(
+          "https://doubtly-backend.onrender.com/api/auth/refreshToken",
+          {},
+          { withCredentials: true }
+        );
+
+        if (response.data.token) {
+          localStorage.setItem("token", response.data.token);
+        } else {
+          console.error("Token refresh failed. Logging out...");
           localStorage.removeItem("token");
-          setIsValid(false);
+          navigate("/login");
         }
+      } catch (e) {
+        console.error("Failed to refresh token. Logging out...");
+        localStorage.removeItem("token");
+        navigate("/login");
       }
     };
 
     if (token) {
       validateToken();
+
+      const refreshInterval = setInterval(refreshToken, 58 * 60 * 1000);
+      return () => clearInterval(refreshInterval);
     } else {
       setIsValid(false);
     }
-  }, [token]);
+  }, [token, navigate]);
 
   if (isValid === null) {
     return <div>Loading...</div>;
