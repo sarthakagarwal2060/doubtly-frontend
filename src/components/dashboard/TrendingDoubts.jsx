@@ -17,11 +17,12 @@ function TrendingDoubts() {
         "https://doubtly-backend.onrender.com/api/doubt/showAll",
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          withCredentials: true,
         }
       );
+
       setTrendingDoubts(response.data.result);
     };
     fetchTrendingDoubts();

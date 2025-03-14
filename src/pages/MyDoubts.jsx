@@ -1,7 +1,7 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
-import axios from "axios"
+import axios from "axios";
 import Doubts from "../components/myDoubts/Doubts";
 import NoDoubts from "../components/myDoubts/NoDoubts";
 
@@ -17,6 +17,7 @@ function MyDoubts() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          withCredentials: true,
         }
       );
       setMyDoubts(response.data.result);
@@ -33,7 +34,7 @@ function MyDoubts() {
       />
       <SideBar />
 
-      {(myDoubts.length==0) ? <NoDoubts /> : <Doubts myDoubts={myDoubts}/>}
+      {myDoubts.length == 0 ? <NoDoubts /> : <Doubts myDoubts={myDoubts} />}
     </>
   );
 }
