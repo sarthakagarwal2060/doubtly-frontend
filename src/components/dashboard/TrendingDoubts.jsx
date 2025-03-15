@@ -4,12 +4,19 @@ import DoubtCard from "./DoubtCard";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 function TrendingDoubts() {
   const navigate = useNavigate();
+  const [trendingDoubts, setTrendingDoubts] = useState([]);
+
   function postdoubt() {
     navigate("/dashboard/postdoubt");
   }
-  const [trendingDoubts, setTrendingDoubts] = useState([]);
+
+  function handleDoubtClick(doubt) {
+    navigate(`/dashboard/doubt/${doubt.id}`);
+  }
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     const fetchTrendingDoubts = async () => {
@@ -22,11 +29,11 @@ function TrendingDoubts() {
           withCredentials: true,
         }
       );
-
       setTrendingDoubts(response.data.result);
     };
     fetchTrendingDoubts();
   }, []);
+  
   return (
     <>
       <section>
@@ -39,7 +46,12 @@ function TrendingDoubts() {
         </div>
         <div className="grid gap-4">
           {trendingDoubts.map((doubt) => (
-            <DoubtCard key={doubt.title} {...doubt} />
+          //  console.log(doubt)
+            <DoubtCard 
+              key={doubt.id || doubt.title}
+              {...doubt} 
+              onClick={() => handleDoubtClick(doubt)}
+            />
           ))}
         </div>
       </section>

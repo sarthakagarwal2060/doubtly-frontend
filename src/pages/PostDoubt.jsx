@@ -1,14 +1,11 @@
-import NavBar from "../components/NavBar";
 import MainComponent from "../components/postdoubt/maincomponent";
 import axios from "axios";
 import { useRef } from "react";
-import SideBar from "../components/SideBar";
+import Dashboard from "./Dashboard";
+
 // Separate the handleSubmit function from the component
 export const handleSubmit = async (titleRef, descriptionRef, categoryRef) => {
   try {
-    // console.log("clicked");
-    // console.log(titleRef.current.value);
-    // console.log(titleRef.current.value, descriptionRef.current.value, categoryRef.current.value);
     const token = localStorage.getItem("token");
     const res = await axios.post(
       "https://doubtly-backend.onrender.com/api/doubt/add",
@@ -25,9 +22,17 @@ export const handleSubmit = async (titleRef, descriptionRef, categoryRef) => {
         withCredentials: true,
       }
     );
-    console.log(res);
-    return res;
-  } catch (e) {}
+
+    if (res.status === 200 && res.data) {
+      console.log("Doubt posted successfully:", res.data);
+      return res;
+    } else {
+      throw new Error("Invalid response from server");
+    }
+  } catch (e) {
+    console.error("Error posting doubt:", e);
+    return null;
+  }
 };
 
 export default function PostDoubt() {
@@ -35,21 +40,18 @@ export default function PostDoubt() {
   const descriptionRef = useRef(null);
   const categoryRef = useRef(null);
 
-  const onSubmit = () => handleSubmit(titleRef, descriptionRef, categoryRef);
-
   return (
     <>
-      <div className="flex flex-col min-h-screen bg-primary">
-        <NavBar searchBar={false} />
-        <div className="flex flex-row flex-grow  ">
-          <SideBar className="w-1/4" />
-          <div className="container mx-auto pt-24 pb-10 px-4 flex-grow">
-            <MainComponent
-              titleRef={titleRef}
-              descriptionRef={descriptionRef}
-              categoryRef={categoryRef}
-            />
-          </div>
+      <div className="fixed inset-0 filter blur-sm">
+        <Dashboard />
+      </div>
+      <div className="fixed inset-0 flex items-center justify-center z-10">
+        <div className="w-full max-w-4xl px-4">
+          <MainComponent
+            titleRef={titleRef}
+            descriptionRef={descriptionRef}
+            categoryRef={categoryRef}
+          />
         </div>
       </div>
     </>

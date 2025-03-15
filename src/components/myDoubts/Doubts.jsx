@@ -1,12 +1,18 @@
 import React from "react";
-
 import DoubtCard from "../dashboard/DoubtCard";
 import { Select } from "@radix-ui/themes";
+import { useNavigate } from "react-router-dom";
 
 function Doubts({myDoubts}) {
+  const navigate = useNavigate();
+
+  function handleDoubtClick(doubt) {
+    navigate(`/dashboard/doubt/${doubt._id}`);
+  }
+
   return (
     <>
-      <main className="pt-16 pl-72 pr-8 h-screen bg-primary ">
+      <main className="pt-16 pl-72 pr-8 h-screen bg-primary">
         <div className="container py-6 space-y-8 ">
           <div className="flex items-center justify-between gap-4 ">
             <div className="space-y-2">
@@ -31,6 +37,7 @@ function Doubts({myDoubts}) {
                 key={doubt.title}
                 {...doubt}
                 className="bg-white/50 hover:bg-white/80 transition-colors"
+                onClick={() => handleDoubtClick(doubt)}
               />
             ))}
           </div>
