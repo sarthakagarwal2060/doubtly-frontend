@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Search, Bell, Menu, ChevronLeft } from "lucide-react";
 import { DropdownMenu, Button, Avatar } from "@radix-ui/themes";
 import { useNavigate } from "react-router-dom";
-
+import Switcher from "./DarkMode/Switcher";
 function NavBar({doubtly, searchBar, notification, profile}) {
   const navigate = useNavigate();
   const [logout, setLogout] = useState(false);
@@ -28,9 +28,14 @@ function NavBar({doubtly, searchBar, notification, profile}) {
             </div>
           </div>
         }
-        {notification && profile &&
+       
+        {
+        
+        notification && profile &&
           <div className="flex items-center gap-6">
+              <Switcher/>
             <button className="h-full w-full">
+          
               <Bell className="h-4 w-4" />
             </button>
 
