@@ -5,8 +5,8 @@ import { Button } from "@radix-ui/themes"
 function NotFound() {
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="max-w-lg w-full bg-white/80 rounded-lg p-8 text-center ">
+      <div className="min-h-screen flex items-center justify-center p-4 ">
+        <div className="max-w-lg w-full bg-white/80 rounded-lg p-8 text-center dark:bg-gray-800">
           <div className="flex justify-center mb-6">
             <AlertTriangle className="h-16 w-16" />
           </div>

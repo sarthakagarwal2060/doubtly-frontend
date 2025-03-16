@@ -18,13 +18,13 @@ export default function TopPerformer() {
     };
 
     return (
-        <div className="max-w-[1200px] mx-auto p-5">
+        <div className="max-w-[1200px] mx-auto p-5 ">
             <div className="text-center mb-10">
-                <Text size="8" weight="bold" className="text-gray-800">Leaderboard</Text>
+                <Text size="8" weight="bold" className="text-gray-800 dark:text-white">Leaderboard</Text>
             </div>
             <Flex gap="4" wrap="wrap" justify="center" className="mb-10">
                 {topUsers.map((user) => (
-                    <div key={user.id} className="w-[300px] p-5 rounded-xl border border-indigo-100 flex flex-col items-center">
+                    <div key={user.id} className="w-[300px] p-5 rounded-xl border border-indigo-100 flex flex-col items-center ">
                         <div className="relative mb-2.5">
                             <img 
                                 src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=random&size=100`}
@@ -46,11 +46,11 @@ export default function TopPerformer() {
                         <Flex gap="4">
                             <div className="text-center">
                                 <Text size="5" weight="bold">{user.solutions}</Text>
-                                <Text size="2" className="text-gray-600">Solutions</Text>
+                                <Text size="2" className="text-gray-600 dark:text-white">Solutions</Text>
                             </div>
                             <div className="text-center">
                                 <Text size="5" weight="bold">{user.doubts}</Text>
-                                <Text size="2" className="text-gray-600">Doubts</Text>
+                                <Text size="2" className="text-gray-600 dark:text-white">Doubts</Text>
                             </div>
                         </Flex>
                     </div>

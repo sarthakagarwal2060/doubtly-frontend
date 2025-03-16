@@ -33,7 +33,7 @@ function NavBar({doubtly, searchBar, notification, profile}) {
         
         notification && profile &&
           <div className="flex items-center gap-6">
-              <Switcher/>
+              <Switcher />
             <button className="h-full w-full">
           
               <Bell className="h-4 w-4" />

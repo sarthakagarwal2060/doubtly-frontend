@@ -6,11 +6,11 @@ import SideBar from '../components/SideBar'
 
 export default function Leaderboard() {
   return (
-    <div className="flex flex-col min-h-screen bg-primary">
+    <div className="flex flex-col min-h-screen bg-primary ">
       <NavBar searchBar={false} />
       <div className="flex flex-row flex-grow">
         <SideBar className="w-1/4" />
-        <div className="container mx-auto pt-24 pb-10 px-4 flex-grow pl-[12rem]">
+        <div className="container mx-auto pt-24 pb-10 px-4 flex-grow pl-[12rem] ">
           <TopPerformer />
           <CompleteLeaderBoard />
         </div>

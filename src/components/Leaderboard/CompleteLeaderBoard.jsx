@@ -21,10 +21,10 @@ export default function CompleteLeaderBoard() {
 
     return (
         <div className="max-w-[1200px] mx-auto p-5">
-            <div className="p-5 rounded-xl border border-indigo-100">
+            <div className="p-5 rounded-xl border border-indigo-100 ">
                 <div className="mb-5">
                     <Text size="6" weight="bold">Complete Leaderboard</Text>
-                    <Text size="3" className="text-gray-600">All users ranked by contribution points</Text>
+                    <Text size="3" className="text-gray-600 dark:text-white">All users ranked by contribution points</Text>
                 </div>
 
                 <Table.Root>
