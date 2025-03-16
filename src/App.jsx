@@ -14,8 +14,9 @@ import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import useDarkSide from "./components/DarkMode/useDarkSide";
 function App() {
+  const [theme] = useDarkSide();
   return (
     <>
       <Routes>
@@ -40,8 +41,9 @@ function App() {
         pauseOnFocusLoss={false}
         draggable={false}
         pauseOnHover={false}
-        theme="dark"
+        theme={theme}
       />
+
     </>
   );
 }

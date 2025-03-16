@@ -19,10 +19,10 @@ function NavBar({doubtly, searchBar, notification, profile}) {
           <div className="flex-1 flex items-center justify-center max-w-2xl">
             <div className="w-full flex items-center space-x-2">
               <div className="relative w-full">
-                <Search className="absolute left-3 top-2.5 h-4 w-4 "/>
+                <Search className="absolute left-3 top-2.5 h-4 w-4  "/>
                 <input
                   placeholder="Search doubts..."
-                  className="w-full pl-9 h-9 rounded-md bg-gray-100 px-3 py-1 text-base shadow-sm focus-visible:outline-zinc-800 focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50  dark:bg-[#1C1C1E] "
+                  className="w-full pl-9 h-9 rounded-md bg-gray-100 px-3 py-1 text-base shadow-sm focus-visible:outline-zinc-800 focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50  dark:bg-[#1C1C1E]"
                 />
               </div>
             </div>

@@ -34,7 +34,7 @@ function MyDoubts() {
       />
       <SideBar />
 
-      {myDoubts.length == 0 ? <NoDoubts /> : <Doubts myDoubts={myDoubts} />}
+      {!myDoubts ? <NoDoubts /> : <Doubts myDoubts={myDoubts} />}
     </>
   );
 }

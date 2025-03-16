@@ -9,7 +9,7 @@ const Category = forwardRef((props, ref) => {
   }));
 
   return (
-    <Box>
+    <Box >
       <Text as="label" size="3" weight="bold" className="block mb-2">
         Category
       </Text>

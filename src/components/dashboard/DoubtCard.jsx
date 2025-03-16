@@ -6,7 +6,7 @@ function DoubtCard({ title, tags, username, answerCount, upvotes, timeAgo, class
   return (
     <>
       <Card 
-        className={`backdrop-blur-sm bg-white/30 border-borderColor shadow-sm hover:shadow-md transition-shadow cursor-pointer ${className || ''}`}
+        className={`backdrop-blur-sm bg-white/30 border-borderColor shadow-sm hover:shadow-md transition-shadow cursor-pointer dark:bg-[#1C1C1E] ${className || ''}`}
         onClick={onClick}
       >
         

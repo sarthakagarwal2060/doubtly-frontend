@@ -45,13 +45,13 @@ export default function PostDoubt() {
       <div className="fixed inset-0 filter blur-sm">
         <Dashboard />
       </div>
-      <div className="fixed inset-0 flex items-center justify-center z-10">
+      <div className="fixed inset-0 flex items-center justify-center z-10 ">
         <div className="w-full max-w-4xl px-4">
           <MainComponent
             titleRef={titleRef}
             descriptionRef={descriptionRef}
             categoryRef={categoryRef}
-          />
+         />
         </div>
       </div>
     </>

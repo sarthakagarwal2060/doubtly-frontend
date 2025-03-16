@@ -5,7 +5,6 @@ import axios from "axios";
 import { useRef } from "react";
 import NavBar from "../components/NavBar";
 import { toast } from "react-toastify";
-// import --
 
 function Login() {
   const navigate = useNavigate();

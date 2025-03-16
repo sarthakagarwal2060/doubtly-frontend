@@ -58,7 +58,7 @@ export default function MainComponent({
   };
 
   return (
-    <Card className="w-full bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-xl">
+    <Card className="w-full bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-xl dark:bg-[#1C1C1E]">
       <div className="flex justify-between items-center mb-4">
         <Text size="6" weight="bold">Post a Doubt</Text>
         <Button 
