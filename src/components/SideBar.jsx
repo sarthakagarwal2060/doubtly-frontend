@@ -30,7 +30,7 @@ function SideBar() {
 
   return (
     <>
-      <div className="fixed top-16 bottom-0 z-50 w-64 bg-primary border-r border-borderColor py-4 px-2 transition-transform duration-200 ease-in-out ">
+      <div className="fixed top-16 bottom-0 z-50 w-64 bg-primary border-r border-borderColor py-4 px-2 transition-transform duration-200 ease-in-out dark:bg-[#1C1C1E]">
         <div className="h-full flex flex-col justify-between">
           <ScrollArea className="flex-1 dark:text-white">
             <div className="flex flex-col dark:text-white">
@@ -39,9 +39,9 @@ function SideBar() {
                   <button
                     key={item.label}
                     className={`flex gap-2 items-center w-full px-3 py-2 pt-4 text-black  hover:bg-[rgba(224,238,251,0.3)] 
-                      dark:
+                   dark:hover:bg-[rgba(30, 72, 136, 0.3)]
                       rounded-md ${
-                      isActive(item.href) ? "bg-[#e0eefb]" : ""
+                      isActive(item.href) ? "bg-[#e0eefb] dark:bg-[#2563EB]" : ""
                     }`}
                   >
                     <item.icon className="mr-2 h-4 w-4 text-black dark:text-white" />

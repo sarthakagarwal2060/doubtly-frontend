@@ -44,7 +44,7 @@ function Login() {
         notification={false}
         profile={false}
       />
-      <div className="flex flex-col items-center justify-center min-h-screen gap-2 bg-primary">
+      <div className="flex flex-col items-center justify-center min-h-screen gap-2 bg-primary dark:text-black">
         <div className="border-2 flex flex-col w-[360px] px-10 py-10 rounded-lg bg-[#e6f2ff]">
           <h1 className="text-center text-3xl font-bold mb-2">LOG IN</h1>
           <label htmlFor="Email" className="text-lg font-semibold mt-5 ml-1">

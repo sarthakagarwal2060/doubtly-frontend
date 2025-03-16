@@ -9,7 +9,7 @@ function LeaderBoard() {
 
   return (
     <>
-      <Card className="backdrop-blur-sm bg-white/30 border-borderColor shadow-sm">
+      <Card className="backdrop-blur-sm bg-white/30 border-borderColor shadow-sm dark:bg-[#1C1C1E]">
         <div className="p-3 pb-6">
           <span className="text-xl font-semibold ">Top Contributors</span>
         </div>

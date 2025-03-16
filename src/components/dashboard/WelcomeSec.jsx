@@ -3,7 +3,7 @@ import React from "react";
 function WelcomeSec({username}) {
   return (
     <>
-      <div className="space-y-2">
+      <div className="space-y-2 dark:bg-[#121212]">
         <h4 className="text-sm font-semibold text-textSecondary">
           Welcome back
         </h4>

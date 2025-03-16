@@ -46,7 +46,7 @@ function LatestDoubts() {
   return (
     <>
       <section>
-        <div className="flex items-center justify-between mb-4 mt-8">
+        <div className="flex items-center justify-between mb-4 mt-8 ">
           <h2 className="text-xl font-semibold">Latest Doubts</h2>
           <Select.Root defaultValue="all" radius="large" size="3">
             <Select.Trigger placeholder="Filter by"/>
