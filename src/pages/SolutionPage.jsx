@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Card, Text, Button, Box, Flex, Avatar, Separator, TextArea } from '@radix-ui/themes';
 import { ThumbsUp, MessageCircle, Clock, X } from 'lucide-react';
 import { toast } from 'react-toastify';
-import Dashboard from './Dashboard';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import NavBar from '../components/NavBar';
+import SideBar from '../components/SideBar';
 
 function SolutionPage() {
   const { doubtId } = useParams();
@@ -153,15 +154,13 @@ function SolutionPage() {
 
   // If we have no doubt data but we're not loading, something went wrong
   if (!loading && !doubt && !error) {
-    // console.log("No doubt data but not loading or error state");
     return (
       <>
-        <div className="fixed inset-0 filter blur-sm">
-          <Dashboard />
-        </div>
-        <div className="fixed inset-0 flex items-center justify-center z-10">
-          <div className="w-full max-w-4xl px-4">
-            <Card className="w-full bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-xl">
+        <NavBar doubtly={false} searchBar={false} notification={true} profile={true}/>
+        <SideBar />
+        <main className="pt-16 pl-72 pr-8 min-h-screen bg-primary">
+          <div className="container py-6">
+            <Card className="w-full bg-white p-6 rounded-lg shadow-xl">
               <Flex justify="between" align="center" mb="4">
                 <Text size="6" weight="bold">Error</Text>
                 <Button 
@@ -182,114 +181,133 @@ function SolutionPage() {
               </Flex>
             </Card>
           </div>
-        </div>
+        </main>
       </>
     );
   }
 
   return (
     <>
-      <div className="fixed inset-0 filter blur-sm">
-        <Dashboard />
-      </div>
-      <div className="fixed inset-0 flex items-center justify-center z-10">
-        <div className="w-full max-w-4xl px-4">
-          <Card className="w-full bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-xl max-h-[90vh] overflow-y-auto">
-            <Flex justify="between" align="center" mb="4">
-              <Text size="6" weight="bold">Solutions</Text>
-              <Button 
-                variant="ghost" 
-                onClick={handleClose}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <X size={18} />
-              </Button>
-            </Flex>
+      <NavBar doubtly={false} searchBar={false} notification={true} profile={true}/>
+      <SideBar />
+      <main className="pt-16 pl-72 pr-8 bg-primary">
+        <div className="container py-6 space-y-8">
+          {/* <div className="flex items-center justify-between gap-4">
+            <div className="space-y-1">
+              <h1 className="text-3xl font-bold tracking-tight">Solutions</h1>
+              <p className="text-gray-500">View and contribute solutions</p>
+            </div>
+          </div> */}
 
-            {/* Doubt details */}
-            <Card className="mb-6 p-4 bg-gray-50">
-              <Flex gap="2" direction="column">
-                <Text size="5" weight="bold">{currentDoubt.title || 'Untitled Doubt'}</Text>
-                <Text size="2" color="gray">Posted by {currentDoubt.username || 'Unknown'}</Text>
-                <Text size="3">{currentDoubt.description || 'No description available'}</Text>
-                <Flex gap="4" className="text-sm text-gray-500 mt-2">
-                  <Flex align="center" gap="1">
-                    <MessageCircle size={16} /> {currentDoubt.answerCount ?? 0}
+          <div className="grid grid-cols-12 gap-6">
+            <div className="col-span-8 space-y-6">
+              <div className="space-y-3">
+                <div>
+                  <Text size="6" weight="bold" className="text-gray-900">
+                    {currentDoubt.title || 'Untitled Doubt'}
+                  </Text>
+                  <br/>
+                  <Text className="mt-2 text-gray-700 leading-relaxed">
+                    {currentDoubt.description || 'No description available'}
+                  </Text>
+                </div>
+                <div className="flex items-center justify-end gap-1">
+                    <Text size="3">Posted by </Text>
+                    <Text size="3" weight="bold">{currentDoubt.username+" " || 'Unknown' }</Text>
+                </div>
+
+                <Flex gap="6" className="pt-4 border-t border-gray-200">
+                  <Flex align="center" gap="2" className="text-gray-500">
+                    <MessageCircle size={16} />
+                    <Text size="2">{currentDoubt.answerCount ?? 0} Solutions</Text>
                   </Flex>
-                  <Flex align="center" gap="1">
-                    <ThumbsUp size={16} /> {currentDoubt.upvotes ?? 0}
+                  <Flex align="center" gap="2" className="text-gray-500">
+                    <ThumbsUp size={16} />
+                    <Text size="2">{currentDoubt.upvotes ?? 0} Upvotes</Text>
                   </Flex>
-                  <Flex align="center" gap="1">
-                    <Clock size={16} /> {currentDoubt.timeAgo || 'Recently'}
+                  <Flex align="center" gap="2" className="text-gray-500">
+                    <Clock size={16} />
+                    <Text size="2">{currentDoubt.timeAgo || 'Recently'}</Text>
                   </Flex>
                 </Flex>
-              </Flex>
-            </Card>
+                </div>
 
-            <Separator size="4" mb="4" />
 
-            {/* Solutions list */}
-            <Box className="mb-6">
-              <Text size="4" weight="bold" mb="3">All Solutions</Text>
-              
-              {solutions.length === 0 ? (
-                <Text size="2" color="gray">No solutions yet. Be the first to help!</Text>
-              ) : (
-                <Flex direction="column" gap="3">
-                  {solutions.map((solution, index) => (
-                    <Card key={index} className="p-4 bg-gray-50">
-                      <Flex gap="3" direction="column">
-                        <Flex align="center" gap="2">
-                          <Avatar 
-                            size="2" 
-                            src={solution.user?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(solution.username || 'User')}`} 
-                            fallback={solution.user?.name?.[0] || 'U'} 
-                          />
-                          <Text size="2" weight="bold">{solution.username || 'Anonymous'}</Text>
-                          <Text size="1" color="gray">{solution.timeAgo}</Text>
+              <div className="space-y-4">
+                <Text size="5" weight="bold">Solutions ({solutions.length})</Text>
+                {solutions.length === 0 ? (
+                  <Card className="bg-white/50 p-8 text-center">
+                    <Text size="2" color="gray" className="mb-2">No solutions yet.</Text>
+                    <br />
+                    <Text size="2" color="gray">Be the first one to help solve this doubt!</Text>
+                  </Card>
+                ) : (
+                  <div className="space-y-4">
+                    {solutions.map((solution, index) => (
+                      <Card key={index} className="bg-white/50 hover:bg-white/80 transition-colors p-6">
+                        <Flex direction="column" gap="4">
+                          <Text className="text-gray-700">{solution.solution} </Text>
+                          <Flex align="center" justify="between">
+                            <Flex align="center" gap="1">
+                              <Avatar 
+                                size="2"
+                                src={solution.user?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(solution.username || 'User')}`}
+                                fallback={solution.user?.name?.[0] || 'U'}
+                                className="border-2 border-white"
+                              />
+                              <div>
+                                <Text weight="bold" size="2">{solution.username+" " || 'Anonymous'}</Text>                                
+                                <Text size="1" color="gray">{solution.timeAgo}</Text>
+                              </div>
+                            </Flex>
+                            <Button variant="soft" size="1">
+                              <ThumbsUp size={14} />
+                              <Text size="1" className="ml-2">{solution.upvotes || 0}</Text>
+                            </Button>
+                          </Flex>
                         </Flex>
-                        <Text size="2">{solution.solution}</Text>
-                        <Flex align="center" gap="2">
-                          <Button variant="ghost" size="1">
-                            <ThumbsUp size={14} />
-                            <Text size="1">{solution.upvotes || 0}</Text>
-                          </Button>
-                        </Flex>
-                      </Flex>
-                    </Card>
-                  ))}
-                </Flex>
-              )}
-            </Box>
+                      </Card>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
 
-            {/* Post new solution */}
-            <Box>
-              <Text size="4" weight="bold" mb="3">Post Your Solution</Text>
-              <TextArea 
-                placeholder="Share your solution or approach..." 
-                ref={solutionRef}
-                className="mb-3 min-h-[120px]"
-              />
-              <Flex justify="end" gap="3">
-                <Button 
-                  variant="soft" 
-                  onClick={handleClose}
-                  disabled={submitting}
-                >
-                  Cancel
-                </Button>
-                <Button 
-                  color="blue" 
-                  onClick={handleSubmitSolution}
-                  disabled={submitting}
-                >
-                  {submitting ? "Posting..." : "Post Solution"}
-                </Button>
-              </Flex>
-            </Box>
-          </Card>
+            <div className="col-span-4">
+              <Card className="bg-white/50 hover:bg-white/80 sticky top-24">
+                <div className="p-6">
+                  <h3 className="mb-4 font-bold text-xl">Post Your Solution</h3>
+                  <input placeholder="Share your solution or approach..." ref={solutionRef} 
+                    className="min-h-[400px] min-w-full mb-4 resize-none p-2 bg-white/50 border-[1px] border-gray-300"/>
+                  <Flex gap="3" justify="end">
+                    <Button 
+                      variant="soft" 
+                      onClick={handleClose}
+                      disabled={submitting}
+                    >
+                      Cancel
+                    </Button>
+                    <Button 
+                      color="blue"
+                      onClick={handleSubmitSolution}
+                      disabled={submitting}
+                    >
+                      {submitting ? (
+                        <Flex align="center" gap="2">
+                          <span className="animate-spin">⏳</span> 
+                          <span>Posting...</span>
+                        </Flex>
+                      ) : (
+                        'Post Solution'
+                      )}
+                    </Button>
+                  </Flex>
+                </div>
+              </Card>
+            </div>
+          </div>
         </div>
-      </div>
+      </main>
     </>
   );
 }
