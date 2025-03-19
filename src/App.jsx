@@ -16,6 +16,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useDarkSide from "./components/DarkMode/useDarkSide";
 import AllDoubts from "./pages/AllDoubts";
+import PostButton from "./components/PostButton"
 function App() {
   const [theme] = useDarkSide();
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/dashboard/doubt/:doubtId" element={<ProtectedRoute><SolutionPage /></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <PostButton/>
       <ToastContainer 
         position="top-right"
         autoClose={3000}
