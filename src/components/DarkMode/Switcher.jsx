@@ -15,8 +15,8 @@ export default function Switcher() {
 
 	return (
 		<>
-			<div className="bg-gray-800 rounded-lg p-2">
-				<DarkModeSwitch className="text-gray-800 dark:text-white"
+			<div className="bg-gray-500 rounded-lg p-2 dark:bg-gray-800">
+				<DarkModeSwitch className=" dark:text-white "
 					checked={darkSide}
 					onChange={toggleDarkMode}
 					size={25}
