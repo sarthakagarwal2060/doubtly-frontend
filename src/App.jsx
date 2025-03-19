@@ -17,14 +17,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import useDarkSide from "./components/DarkMode/useDarkSide";
 import AllDoubts from "./pages/AllDoubts";
 import PostButton from "./components/PostButton"
+import PublicRoute from "./components/PublicRoute";
 function App() {
   const [theme] = useDarkSide();
   return (
     <>
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<PublicRoute><Landing /></PublicRoute>} />
+        <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+        <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/dashboard/postdoubt" element={<ProtectedRoute><PostDoubt /></ProtectedRoute>} />
         <Route path="/dashboard/alldoubts" element={<ProtectedRoute><AllDoubts /></ProtectedRoute>} />
