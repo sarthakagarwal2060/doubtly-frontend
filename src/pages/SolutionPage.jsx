@@ -129,7 +129,7 @@ function SolutionPage() {
   };
 
   const handleClose = () => {
-    navigate(-1); // Go back to previous page
+    navigate(-1);
   };
 
   // Simple fallback for API failures
@@ -152,7 +152,6 @@ function SolutionPage() {
   // console.log("Current doubt state before render:", doubt);
   // console.log("Using doubt data:", currentDoubt);
 
-  // If we have no doubt data but we're not loading, something went wrong
   if (!loading && !doubt && !error) {
     return (
       <>
@@ -271,39 +270,29 @@ function SolutionPage() {
                   </div>
                 )}
               </div>
-            </div>
 
-            <div className="col-span-4">
-              <Card className="bg-white/50 hover:bg-white/80 sticky top-24">
-                <div className="p-6">
-                  <h3 className="mb-4 font-bold text-xl">Post Your Solution</h3>
-                  <input placeholder="Share your solution or approach..." ref={solutionRef} 
-                    className="min-h-[400px] min-w-full mb-4 resize-none p-2 bg-white/50 border-[1px] border-gray-300"/>
-                  <Flex gap="3" justify="end">
-                    <Button 
-                      variant="soft" 
-                      onClick={handleClose}
-                      disabled={submitting}
-                    >
-                      Cancel
-                    </Button>
-                    <Button 
-                      color="blue"
-                      onClick={handleSubmitSolution}
-                      disabled={submitting}
-                    >
-                      {submitting ? (
-                        <Flex align="center" gap="2">
-                          <span className="animate-spin">⏳</span> 
-                          <span>Posting...</span>
-                        </Flex>
-                      ) : (
-                        'Post Solution'
-                      )}
-                    </Button>
-                  </Flex>
-                </div>
-              </Card>
+              <div className="col-span-4">
+                <Card className="bg-white/50 hover:bg-white/80 sticky top-24">
+                  <div className="p-6">
+                    <h3 className="mb-4 font-bold text-xl">Post Your Solution</h3>
+                    <textarea placeholder="Share your solution or approach..." ref={solutionRef} 
+                      className="min-h-[300px] min-w-full mb-4 resize-none p-2 start-0 bg-white/50 border-[1px] border-gray-300"/>
+                    <Flex gap="3" justify="end">
+                      <Button variant="soft" onClick={handleClose} disabled={submitting}>Cancel</Button>
+                      <Button color="blue" onClick={handleSubmitSolution} disabled={submitting}>
+                        {submitting ? (
+                          <Flex align="center" gap="2">
+                            <span className="animate-spin">⏳</span> 
+                            <span>Posting...</span>
+                          </Flex>
+                        ) : (
+                          'Post Solution'
+                        )}
+                      </Button>
+                    </Flex>
+                  </div>
+                </Card>
+              </div>
             </div>
           </div>
         </div>
