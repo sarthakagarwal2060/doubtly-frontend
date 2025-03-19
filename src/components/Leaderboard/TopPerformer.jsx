@@ -2,14 +2,12 @@ import React from 'react';
 import { Card, Box, Text, Flex } from "@radix-ui/themes";
 
 export default function TopPerformer() {
-    // Mock data - replace with actual data from your API
     const topUsers = [
         { id: 1, name: "Sarthak Agarwal", points: 1250, solutions: 78, doubts: 42, rank: 1, avatar: "" },
-        { id: 2, name: "Apporva Dugar", points: 980, solutions: 54, doubts: 31, rank: 2, avatar: "" },
+        { id: 2, name: "Apurv Dugar", points: 980, solutions: 54, doubts: 31, rank: 2, avatar: "" },
         { id: 3, name: "Narendra Sirvi", points: 875, solutions: 49, doubts: 25, rank: 3, avatar: "" },
     ];
 
-    // Function to render rank icon
     const getRankIcon = (rank) => {
         if (rank === 1) return <span className="text-yellow-400">🏆</span>;
         if (rank === 2) return <span className="text-gray-400">🥈</span>;
@@ -46,11 +44,11 @@ export default function TopPerformer() {
                         <Flex gap="4">
                             <div className="text-center">
                                 <Text size="5" weight="bold">{user.solutions}</Text>
-                                <Text size="2" className="text-gray-600 dark:text-white">Solutions</Text>
+                                <Text size="2" className="text-gray-600 dark:text-white"> Solutions</Text>
                             </div>
                             <div className="text-center">
                                 <Text size="5" weight="bold">{user.doubts}</Text>
-                                <Text size="2" className="text-gray-600 dark:text-white">Doubts</Text>
+                                <Text size="2" className="text-gray-600 dark:text-white"> Doubts</Text>
                             </div>
                         </Flex>
                     </div>

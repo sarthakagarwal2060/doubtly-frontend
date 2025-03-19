@@ -12,7 +12,7 @@ function Doubts({myDoubts}) {
 
   return (
     <>
-      <main className="pt-16 pl-72 pr-8 h-screen bg-primary">
+      <main className="pt-16 pl-72 pr-8 bg-primary">
         <div className="container py-6 space-y-8 ">
           <div className="flex items-center justify-between gap-4 ">
             <div className="space-y-2">
