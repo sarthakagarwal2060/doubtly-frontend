@@ -22,10 +22,15 @@ const ProtectedRoute = ({ children }) => {
           setIsValid(true);
         }
       } catch (error) {
-        console.log("Token invalid or expired:", error);
-        setIsValid(false);
-        localStorage.removeItem("token");
-        navigate("/login");
+        if (error.response && error.response.status === 401) {
+          console.log("Token expired. Attempting to refresh...");
+          await refreshToken();
+        } else {
+          console.log("Token invalid or expired:", error);
+          setIsValid(false);
+          localStorage.removeItem("token");
+          navigate("/login");
+        }
       }
     };
 
@@ -36,9 +41,9 @@ const ProtectedRoute = ({ children }) => {
           {},
           { withCredentials: true }
         );
-
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);
+          setIsValid(true);
         } else {
           console.error("Token refresh failed. Logging out...");
           localStorage.removeItem("token");
@@ -54,7 +59,7 @@ const ProtectedRoute = ({ children }) => {
     if (token) {
       validateToken();
 
-      const refreshInterval = setInterval(refreshToken, 58 * 60 * 1000);
+      const refreshInterval = setInterval(refreshToken, 10 * 1000);
       return () => clearInterval(refreshInterval);
     } else {
       setIsValid(false);
