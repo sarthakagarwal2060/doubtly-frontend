@@ -13,16 +13,16 @@ function NavBar({doubtly, searchBar, notification, profile}) {
   } ;
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between bg-primary px-4 border-b border-borderColor dark:bg-[#1C1C1E]">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between bg-primary px-4 border-b border-borderColor dark:bg-[#1C1C1E] dark:border-[#414749]">
         {doubtly ? <div className="font-bold text-2xl">Doubtly</div> : <div className="font-bold text-2xl cursor-pointer"  onClick={() => navigate("/dashboard")}><ChevronLeft/></div>}
         {searchBar && 
           <div className="flex-1 flex items-center justify-center max-w-2xl">
-            <div className="w-full flex items-center space-x-2">
-              <div className="relative w-full">
+            <div className="w-full flex items-center space-x-2 ">
+              <div className="relative w-full ">
                 <Search className="absolute left-3 top-2.5 h-4 w-4  "/>
                 <input
                   placeholder="Search doubts..."
-                  className="w-full pl-9 h-9 rounded-md bg-gray-100 px-3 py-1 text-base shadow-sm focus-visible:outline-zinc-800 focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50  dark:bg-[#1C1C1E]"
+                  className="w-full pl-9 h-9 rounded-md bg-gray-100 px-3 py-1 text-base shadow-sm focus-visible:outline-zinc-800 focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50  dark:bg-gray-800"
                 />
               </div>
             </div>

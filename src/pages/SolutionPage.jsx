@@ -157,9 +157,9 @@ function SolutionPage() {
       <>
         <NavBar doubtly={false} searchBar={false} notification={true} profile={true}/>
         <SideBar />
-        <main className="pt-16 pl-72 pr-8 min-h-screen bg-primary">
-          <div className="container py-6">
-            <Card className="w-full bg-white p-6 rounded-lg shadow-xl">
+        <main className="pt-16 pl-72 pr-8 min-h-screen bg-primary ">
+          <div className="container py-6 ">
+            <Card className="w-full bg-white p-6 rounded-lg shadow-xl ">
               <Flex justify="between" align="center" mb="4">
                 <Text size="6" weight="bold">Error</Text>
                 <Button 
@@ -189,8 +189,8 @@ function SolutionPage() {
     <>
       <NavBar doubtly={false} searchBar={false} notification={true} profile={true}/>
       <SideBar />
-      <main className="pt-16 pl-72 pr-8 bg-primary">
-        <div className="container py-6 space-y-8">
+      <main className="pt-16 pl-72 pr-8 bg-primary flex flex-col min-h-screen">
+        <div className="container py-6 space-y-8 h-full flex-grow">
           {/* <div className="flex items-center justify-between gap-4">
             <div className="space-y-1">
               <h1 className="text-3xl font-bold tracking-tight">Solutions</h1>
@@ -198,15 +198,15 @@ function SolutionPage() {
             </div>
           </div> */}
 
-          <div className="grid grid-cols-12 gap-6">
+          <div className="grid grid-cols-12 gap-6 dark:text-white">
             <div className="col-span-8 space-y-6">
               <div className="space-y-3">
                 <div>
-                  <Text size="6" weight="bold" className="text-gray-900">
+                  <Text size="6" weight="bold" className="text-gray-900 dark:text-white">
                     {currentDoubt.title || 'Untitled Doubt'}
                   </Text>
                   <br/>
-                  <Text className="mt-2 text-gray-700 leading-relaxed">
+                  <Text className="mt-2 text-gray-700 leading-relaxed dark:text-gray-300">
                     {currentDoubt.description || 'No description available'}
                   </Text>
                 </div>
@@ -235,7 +235,7 @@ function SolutionPage() {
               <div className="space-y-4">
                 <Text size="5" weight="bold">Solutions ({solutions.length})</Text>
                 {solutions.length === 0 ? (
-                  <Card className="bg-white/50 p-8 text-center">
+                  <Card className="bg-white p-8 text-center">
                     <Text size="2" color="gray" className="mb-2">No solutions yet.</Text>
                     <br />
                     <Text size="2" color="gray">Be the first one to help solve this doubt!</Text>
@@ -243,16 +243,16 @@ function SolutionPage() {
                 ) : (
                   <div className="space-y-4">
                     {solutions.map((solution, index) => (
-                      <Card key={index} className="bg-white/50 hover:bg-white/80 transition-colors p-6">
+                      <Card key={index} className="bg-white/50 hover:bg-white/80 transition-colors p-6 dark:bg-[#1C1C1E]">
                         <Flex direction="column" gap="4">
-                          <Text className="text-gray-700">{solution.solution} </Text>
+                          <Text className="text-gray-700 dark:text-white">{solution.solution} </Text>
                           <Flex align="center" justify="between">
                             <Flex align="center" gap="1">
                               <Avatar 
                                 size="2"
                                 src={solution.user?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(solution.username || 'User')}`}
                                 fallback={solution.user?.name?.[0] || 'U'}
-                                className="border-2 border-white"
+                                className="border-2 border-white dark:border-black dark:text-white dark:bg-black"
                               />
                               <div>
                                 <Text weight="bold" size="2">{solution.username+" " || 'Anonymous'}</Text>                                
@@ -272,11 +272,11 @@ function SolutionPage() {
               </div>
 
               <div className="col-span-4">
-                <Card className="bg-white/50 hover:bg-white/80 sticky top-24">
+                <Card className="bg-white/50 hover:bg-white/80 sticky top-24 dark:bg-[#1C1C1E]">
                   <div className="p-6">
                     <h3 className="mb-4 font-bold text-xl">Post Your Solution</h3>
                     <textarea placeholder="Share your solution or approach..." ref={solutionRef} 
-                      className="min-h-[300px] min-w-full mb-4 resize-none p-2 start-0 bg-white/50 border-[1px] border-gray-300"/>
+                      className="min-h-[300px] min-w-full mb-4 resize-none p-2 start-0 bg-white/50 border-[1px] border-gray-300 dark:bg-[#151719]" />
                     <Flex gap="3" justify="end">
                       <Button variant="soft" onClick={handleClose} disabled={submitting}>Cancel</Button>
                       <Button color="blue" onClick={handleSubmitSolution} disabled={submitting}>
@@ -297,6 +297,7 @@ function SolutionPage() {
           </div>
         </div>
       </main>
+
     </>
   );
 }
