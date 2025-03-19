@@ -7,7 +7,7 @@ import SideBar from '../components/SideBar'
 export default function Leaderboard() {
   return (
     <div className="flex flex-col min-h-screen bg-primary ">
-      <NavBar searchBar={false} />
+      <NavBar doubtly={false} searchBar={false} notification={true} profile={true}/>
       <div className="flex flex-row flex-grow">
         <SideBar className="w-1/4" />
         <div className="container mx-auto pt-24 pb-10 px-4 flex-grow pl-[12rem] ">

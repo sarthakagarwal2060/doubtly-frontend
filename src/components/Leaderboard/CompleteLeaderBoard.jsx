@@ -5,7 +5,7 @@ export default function CompleteLeaderBoard() {
     // Mock data - replace with actual data from your API
     const allUsers = [
         { id: 1, name: "Sarthak Agarwal", points: 1250, solutions: 78, doubts: 42, rank: 1, avatar: "" },
-        { id: 2, name: "Apporva Dugar", points: 980, solutions: 54, doubts: 31, rank: 2, avatar: "" },
+        { id: 2, name: "Apurv Dugar", points: 980, solutions: 54, doubts: 31, rank: 2, avatar: "" },
         { id: 3, name: "Narendra Sirvi", points: 875, solutions: 49, doubts: 25, rank: 3, avatar: "" },
         { id: 4, name: "Mehul Agarwal", points: 720, solutions: 38, doubts: 19, rank: 4, avatar: "" },
         { id: 5, name: "Ojas Maheswari", points: 650, solutions: 32, doubts: 15, rank: 5, avatar: "" },
@@ -24,6 +24,7 @@ export default function CompleteLeaderBoard() {
             <div className="p-5 rounded-xl border border-indigo-100 ">
                 <div className="mb-5">
                     <Text size="6" weight="bold">Complete Leaderboard</Text>
+                    <br />
                     <Text size="3" className="text-gray-600 dark:text-white">All users ranked by contribution points</Text>
                 </div>
 
