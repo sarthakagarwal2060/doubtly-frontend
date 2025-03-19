@@ -4,6 +4,7 @@ import axios from "axios";
 
 const ProtectedRoute = ({ children }) => {
   const [isValid, setIsValid] = useState(null);
+  const [key, setKey] = useState(0);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
@@ -26,51 +27,83 @@ const ProtectedRoute = ({ children }) => {
           console.log("Token expired. Attempting to refresh...");
           await refreshToken();
         } else {
-          console.log("Token invalid or expired:", error);
-          setIsValid(false);
-          localStorage.removeItem("token");
-          navigate("/login");
+          console.log("Invalid token. Logging out...");
+          handleLogout();
         }
       }
     };
 
-    const refreshToken = async () => {
+    const refreshToken = async (retryCount = 0) => {
+      if (!navigator.onLine) {
+        console.warn("No internet connection. Waiting to retry...");
+        return setTimeout(() => refreshToken(retryCount), 5000);
+      }
+
       try {
         const response = await axios.post(
           "https://doubtly-backend.onrender.com/api/auth/refreshToken",
           {},
           { withCredentials: true }
         );
+
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);
           setIsValid(true);
+          setKey((prevKey) => prevKey + 1);
         } else {
           console.error("Token refresh failed. Logging out...");
-          localStorage.removeItem("token");
-          navigate("/login");
+          handleLogout();
         }
-      } catch (e) {
-        console.error("Failed to refresh token. Logging out...");
-        localStorage.removeItem("token");
-        navigate("/login");
+      } catch (error) {
+        if (!navigator.onLine) {
+          console.warn("Still no internet. Retrying...");
+          return setTimeout(() => refreshToken(retryCount), 5000);
+        }
+
+        if (retryCount < 3) {
+          console.warn(`Retrying token refresh... Attempt ${retryCount + 1}`);
+          return setTimeout(
+            () => refreshToken(retryCount + 1),
+            2000 * (retryCount + 1)
+          );
+        }
+
+        console.error(
+          "Failed to refresh token after multiple attempts. Logging out..."
+        );
+        handleLogout();
       }
+    };
+
+    const handleLogout = () => {
+      localStorage.removeItem("token");
+      setIsValid(false);
+      navigate("/login");
     };
 
     if (token) {
       validateToken();
 
-      const refreshInterval = setInterval(refreshToken, 10 * 1000);
+      const refreshInterval = setInterval(() => refreshToken(), 58 * 60 * 1000);
       return () => clearInterval(refreshInterval);
     } else {
-      setIsValid(false);
+      handleLogout();
     }
+
+    const handleOnline = () => {
+      console.log("Internet restored. Checking token...");
+      validateToken();
+    };
+
+    window.addEventListener("online", handleOnline);
+    return () => window.removeEventListener("online", handleOnline);
   }, [token, navigate]);
 
   if (isValid === null) {
     return <div>Loading...</div>;
   }
 
-  return isValid ? children : <Navigate to="/login" />;
+  return isValid ? <div key={key}>{children}</div> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
