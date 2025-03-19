@@ -8,6 +8,7 @@ import {
   Gift,
   Settings,
   HelpCircle,
+  GalleryVerticalEnd,
 } from "lucide-react";
 
 function SideBar() {
@@ -15,6 +16,7 @@ function SideBar() {
   const topMenuItems = [
     { icon: Home, label: "Home", href: "/dashboard" },
     { icon: PlusCircle, label: "Post a Doubt", href: "/dashboard/postdoubt" },
+    { icon: GalleryVerticalEnd, label: "All Doubts", href: "/dashboard/allDoubts" },
     { icon: MessageCircle, label: "My Doubts", href: "/dashboard/mydoubts" },
     { icon: Trophy, label: "Leaderboard", href: "/dashboard/leaderboard" },
     { icon: Gift, label: "Points & Rewards", href: "/dashboard/points" },
