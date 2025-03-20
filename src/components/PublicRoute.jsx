@@ -22,16 +22,27 @@ const PublicRoute = ({ children }) => {
           setIsValid(true);
         }
       } catch (error) {
-        if (error.response && error.response.status === 401) {
-          console.log("Token expired. Attempting to refresh...");
-          await refreshToken();
+        if (error.response) {
+          const message = error.response.data?.message || "";
+
+          if (error.response.status === 401) {
+            if (message.includes("expired")) {
+              console.log("Token expired. Attempting to refresh...");
+              await refreshToken();
+            } else {
+              console.log("Invalid token. Proceeding as public user...");
+              handleLogout();
+            }
+          } else {
+            console.log("Unexpected error:", error);
+            handleLogout();
+          }
         } else {
           console.log("Invalid token. Proceeding as public user...");
           setIsValid(false);
         }
       }
     };
-
     const refreshToken = async () => {
       try {
         const response = await axios.post(
