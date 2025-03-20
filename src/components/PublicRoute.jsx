@@ -1,9 +1,8 @@
-import React from "react";
-import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
-function PublicRoute({children}) {
+const PublicRoute = ({ children }) => {
   const [isValid, setIsValid] = useState(null);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -21,19 +20,56 @@ function PublicRoute({children}) {
         );
         if (response.status === 200) {
           setIsValid(true);
-          
         }
       } catch (error) {
-        console.log("Token invalid or expired:", error);
-        setIsValid(false);
-        localStorage.removeItem("token");
-        navigate("/login");
+        if (error.response && error.response.status === 401) {
+          console.log("Token expired. Attempting to refresh...");
+          await refreshToken();
+        } else {
+          console.log("Invalid token. Proceeding as public user...");
+          setIsValid(false);
+        }
       }
     };
-    validateToken()
-  }, [token, navigate]);
 
-  return isValid ? <Navigate to={"/dashboard"}/> : children;
-}
+    const refreshToken = async () => {
+      try {
+        const response = await axios.post(
+          "https://doubtly-backend.onrender.com/api/auth/refreshToken",
+          {},
+          { withCredentials: true }
+        );
+
+        if (response.data.token) {
+          localStorage.setItem("token", response.data.token);
+          setIsValid(true);
+        } else {
+          console.error("Token refresh failed. Logging out...");
+          handleLogout();
+        }
+      } catch (error) {
+        console.error("Failed to refresh token. Logging out...");
+        handleLogout();
+      }
+    };
+
+    const handleLogout = () => {
+      localStorage.removeItem("token");
+      setIsValid(false);
+    };
+
+    if (token) {
+      validateToken();
+    } else {
+      setIsValid(false);
+    }
+  }, [token]);
+
+  if (isValid === null) {
+    return <div>Loading...</div>;
+  }
+
+  return isValid ? <Navigate to="/dashboard" /> : children;
+};
 
 export default PublicRoute;
