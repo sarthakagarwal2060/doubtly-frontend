@@ -155,7 +155,7 @@ function SolutionPage() {
   if (!loading && !doubt && !error) {
     return (
       <>
-        <NavBar doubtly={false} searchBar={false} notification={true} profile={true}/>
+        <NavBar doubtly={false} searchBar={true} notification={true} profile={true}/>
         <SideBar />
         <main className="pt-16 pl-72 pr-8 min-h-screen bg-primary ">
           <div className="container py-6 ">
@@ -189,115 +189,112 @@ function SolutionPage() {
     <>
       <NavBar doubtly={false} searchBar={false} notification={true} profile={true}/>
       <SideBar />
-      <main className="pt-16 pl-72 pr-8 bg-primary flex flex-col min-h-screen">
-        <div className="container py-6 space-y-8 h-full flex-grow">
-          {/* <div className="flex items-center justify-between gap-4">
-            <div className="space-y-1">
-              <h1 className="text-3xl font-bold tracking-tight">Solutions</h1>
-              <p className="text-gray-500">View and contribute solutions</p>
-            </div>
-          </div> */}
+      <main className="pt-16 pl-72 pr-8 min-h-screen bg-primary flex flex-col dark:bg-[#1c1c1e]">
+        <div className="container w-[70%] py-6 space-y-8 flex-grow">
+          
+          {/* Doubt Card */}
+          <div>
+            <div className="space-y-3 dark:bg-[#1c1c1e]">
+              <div>
+                <Text size="6" weight="bold" className="text-gray-900 dark:text-white">
+                  {currentDoubt.title || 'Untitled Doubt'}
+                </Text>
+                <br />
+                <Text className="mt-2 text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {currentDoubt.description || 'No description available'}
+                </Text>
+              </div>
+              <div className="flex items-center justify-end gap-1">
+                <Text size="3">Posted by </Text>
+                <Text size="3" weight="bold" className="dark:text-white">{currentDoubt.username || 'Unknown'}</Text>
+              </div>
 
-          <div className="grid grid-cols-12 gap-6 dark:text-white">
-            <div className="col-span-8 space-y-6">
-              <div className="space-y-3">
-                <div>
-                  <Text size="6" weight="bold" className="text-gray-900 dark:text-white">
-                    {currentDoubt.title || 'Untitled Doubt'}
-                  </Text>
-                  <br/>
-                  <Text className="mt-2 text-gray-700 leading-relaxed dark:text-gray-300">
-                    {currentDoubt.description || 'No description available'}
-                  </Text>
-                </div>
-                <div className="flex items-center justify-end gap-1">
-                    <Text size="3">Posted by </Text>
-                    <Text size="3" weight="bold">{currentDoubt.username+" " || 'Unknown' }</Text>
-                </div>
 
-                <Flex gap="6" className="pt-4 border-t border-gray-200">
-                  <Flex align="center" gap="2" className="text-gray-500">
-                    <MessageCircle size={16} />
-                    <Text size="2">{currentDoubt.answerCount ?? 0} Solutions</Text>
-                  </Flex>
-                  <Flex align="center" gap="2" className="text-gray-500">
-                    <ThumbsUp size={16} />
-                    <Text size="2">{currentDoubt.upvotes ?? 0} Upvotes</Text>
-                  </Flex>
-                  <Flex align="center" gap="2" className="text-gray-500">
-                    <Clock size={16} />
-                    <Text size="2">{currentDoubt.timeAgo || 'Recently'}</Text>
-                  </Flex>
+              <Flex gap="6" className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                <Flex align="center" gap="2" className="text-gray-500 dark:text-gray-400">
+                  <MessageCircle size={16} />
+                  <Text size="2">{currentDoubt.answerCount ?? 0} Solutions</Text>
                 </Flex>
-                </div>
-
-
-              <div className="space-y-4">
-                <Text size="5" weight="bold">Solutions ({solutions.length})</Text>
-                {solutions.length === 0 ? (
-                  <Card className="bg-white p-8 text-center">
-                    <Text size="2" color="gray" className="mb-2">No solutions yet.</Text>
-                    <br />
-                    <Text size="2" color="gray">Be the first one to help solve this doubt!</Text>
-                  </Card>
-                ) : (
-                  <div className="space-y-4">
-                    {solutions.map((solution, index) => (
-                      <Card key={index} className="bg-white/50 hover:bg-white/80 transition-colors p-6 dark:bg-[#1C1C1E]">
-                        <Flex direction="column" gap="4">
-                          <Text className="text-gray-700 dark:text-white">{solution.solution} </Text>
-                          <Flex align="center" justify="between">
-                            <Flex align="center" gap="1">
-                              <Avatar 
-                                size="2"
-                                src={solution.user?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(solution.username || 'User')}`}
-                                fallback={solution.user?.name?.[0] || 'U'}
-                                className="border-2 border-white dark:border-black dark:text-white dark:bg-black"
-                              />
-                              <div>
-                                <Text weight="bold" size="2">{solution.username+" " || 'Anonymous'}</Text>                                
-                                <Text size="1" color="gray">{solution.timeAgo}</Text>
-                              </div>
-                            </Flex>
-                            <Button variant="soft" size="1">
-                              <ThumbsUp size={14} />
-                              <Text size="1" className="ml-2">{solution.upvotes || 0}</Text>
-                            </Button>
-                          </Flex>
-                        </Flex>
-                      </Card>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="col-span-4">
-                <Card className="bg-white/50 hover:bg-white/80 sticky top-24 dark:bg-[#1C1C1E]">
-                  <div className="p-6">
-                    <h3 className="mb-4 font-bold text-xl">Post Your Solution</h3>
-                    <textarea placeholder="Share your solution or approach..." ref={solutionRef} 
-                      className="min-h-[300px] min-w-full mb-4 resize-none p-2 start-0 bg-white/50 border-[1px] border-gray-300 dark:bg-[#151719]" />
-                    <Flex gap="3" justify="end">
-                      <Button variant="soft" onClick={handleClose} disabled={submitting}>Cancel</Button>
-                      <Button color="blue" onClick={handleSubmitSolution} disabled={submitting}>
-                        {submitting ? (
-                          <Flex align="center" gap="2">
-                            <span className="animate-spin">⏳</span> 
-                            <span>Posting...</span>
-                          </Flex>
-                        ) : (
-                          'Post Solution'
-                        )}
-                      </Button>
-                    </Flex>
-                  </div>
-                </Card>
-              </div>
+                <Flex align="center" gap="2" className="text-gray-500 dark:text-gray-400">
+                  <ThumbsUp size={16} />
+                  <Text size="2">{currentDoubt.upvotes ?? 0} Upvotes</Text>
+                </Flex>
+                <Flex align="center" gap="2" className="text-gray-500 dark:text-gray-400">
+                  <Clock size={16} />
+                  <Text size="2">{currentDoubt.timeAgo || 'Recently'}</Text>
+                </Flex>
+              </Flex>
             </div>
           </div>
+
+          {/* Solutions Section */}
+          <div className="space-y-4">
+            <Text size="5" weight="bold" className="dark:text-white">Solutions ({solutions.length})</Text>
+            
+            {solutions.length === 0 ? (
+              <Card className="bg-white/50 dark:bg-gray-800/50 p-8 text-center">
+                <Text size="3" color="gray" className="mb-2 dark:text-gray-300">No solutions yet</Text>
+                <br />
+                <Text size="2" color="gray" className="dark:text-gray-400">Be the first one to help solve this doubt!</Text>
+              </Card>
+            ) : (
+              <div className="space-y-4">
+                {solutions.map((solution, index) => (
+                  <Card key={index} className="bg-white/50 dark:bg-gray-800/50 hover:bg-white/80 dark:hover:bg-gray-800/80 transition-colors p-6">
+                    <Flex direction="column" gap="4">
+                      <Text className="text-gray-700 dark:text-gray-300">{solution.solution}</Text>
+                      <Flex align="center" justify="between">
+                        <Flex align="center" gap="1">
+                          <Avatar 
+                            size="2"
+                            src={solution.user?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(solution.username || 'User')}`}
+                            fallback={solution.user?.name?.[0] || 'U'}
+                            className="border-2 border-white dark:border-gray-700"
+                          />
+                          <div>
+                            <Text weight="bold" size="2" className="dark:text-white">{solution.username+" " || 'Anonymous '}</Text>
+                            <Text size="1" color="gray" className="dark:text-gray-400">{solution.timeAgo}</Text>
+                          </div>
+                        </Flex>
+                        <Button variant="soft" size="1" className="dark:bg-gray-700 dark:hover:bg-gray-600">
+                          <ThumbsUp size={14} />
+                          <Text size="1" className="ml-2">{solution.upvotes || 0}</Text>
+                        </Button>
+                      </Flex>
+                    </Flex>
+                  </Card>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Post Solution Section */}
+          <div className='mt-24 p-8'></div>
+          <Card className="bg-white/50 dark:bg-gray-800/50 hover:bg-white/80 dark:hover:bg-gray-800/80 p-6">
+            <div className='p-6'>
+              <h3 className="mb-4 font-bold text-xl dark:text-white">Post Your Solution</h3>
+              <textArea 
+                placeholder="Share your solution or approach..."
+                ref={solutionRef}
+                className="min-h-[300px] min-w-full mb-4 resize-none p-2 start-0 bg-white/50 border-[1px] border-gray-300 dark:bg-gray-700/50 dark:text-white dark:placeholder:text-gray-400"
+              />
+              <Flex gap="3" justify="end">
+                <Button variant="soft" onClick={handleClose} disabled={submitting} className="dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white">Cancel</Button>
+                <Button color="blue" onClick={handleSubmitSolution} disabled={submitting} >
+                  {submitting ? (
+                    <Flex align="center" gap="2">
+                      <span className="animate-spin">⏳</span> 
+                      <span>Posting...</span>
+                    </Flex>
+                  ) : (
+                    'Post Solution'
+                  )}
+                </Button>
+              </Flex>
+            </div>
+          </Card>
         </div>
       </main>
-
     </>
   );
 }
