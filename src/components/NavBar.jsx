@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Search, Bell, Menu, ChevronLeft } from "lucide-react";
 import { DropdownMenu, Button, Avatar } from "@radix-ui/themes";
 import { useNavigate } from "react-router-dom";
-import Switcher from "./DarkMode/Switcher";
+import DarkModeToggle from "./DarkMode/DarkModeToggle";
 function NavBar({doubtly, searchBar, notification, profile}) {
   const navigate = useNavigate();
   const [logout, setLogout] = useState(false);
@@ -13,7 +13,7 @@ function NavBar({doubtly, searchBar, notification, profile}) {
   } ;
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between bg-primary px-4 border-b border-borderColor dark:bg-[#1C1C1E] dark:border-[#414749]">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between bg-primary px-4 border-b border-borderColor dark:bg-[#1C1C1E] dark:border-[#414749] bg-white">
         {doubtly ? <div className="font-bold text-2xl">Doubtly</div> : <div className="font-bold text-2xl cursor-pointer"  onClick={() => navigate("/dashboard")}><ChevronLeft/></div>}
         {searchBar && 
           <div className="flex-1 flex items-center justify-center max-w-2xl">
@@ -33,8 +33,8 @@ function NavBar({doubtly, searchBar, notification, profile}) {
         
         notification && profile &&
           <div className="flex items-center gap-6">
-              <Switcher />
-            <button className="h-full w-full">
+              <DarkModeToggle />
+            <button className="h-full">
           
               <Bell className="h-4 w-4" />
             </button>
