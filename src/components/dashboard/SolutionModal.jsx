@@ -4,6 +4,7 @@ import { ThumbsUp, MessageCircle, Clock, X } from 'lucide-react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Dashboard from '../../pages/Dashboard';
+import Loader from '../Loader';
 
 function SolutionModal({ doubt, onClose }) {
   const [solutions, setSolutions] = useState([]);
@@ -119,7 +120,7 @@ function SolutionModal({ doubt, onClose }) {
               <Text size="4" weight="bold" mb="3">All Solutions</Text>
               
               {loading ? (
-                <Text size="2" color="gray">Loading solutions...</Text>
+                <Text size="2" color="gray"><Loader /></Text>
               ) : solutions.length === 0 ? (
                 <Text size="2" color="gray">No solutions yet. Be the first to help!</Text>
               ) : (
