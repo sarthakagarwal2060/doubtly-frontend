@@ -1,7 +1,7 @@
 import { Award, MessageCircle, ThumbsUp } from "lucide-react"
 import { Card} from "@radix-ui/themes";
 
-function Stats({points}) {
+function Stats({userDetails}) {
   return (
     <>
       <div className="grid gap-4 grid-cols-3 ">
@@ -11,8 +11,8 @@ function Stats({points}) {
             <MessageCircle className="h-4 w-4 " />
           </div>
           <div className="p-3 pt-0">
-            <div className="text-2xl font-bold">24</div>
-            <p className="text-xs text-textSecondary">+4 from last week</p>
+            <div className="text-2xl font-bold">{userDetails.doubtAsked}</div>
+            <p className="text-xs text-textSecondary">+{userDetails.doubtAsked} from last week</p>
           </div>
         </Card>
         <Card className="backdrop-blur-sm bg-white/30 border-borderColor shadow-sm dark:bg-[#1C1C1E]">
@@ -21,8 +21,8 @@ function Stats({points}) {
             <Award className="h-4 w-4 " />
           </div>
           <div className="p-3 pt-0">
-            <div className="text-2xl font-bold">{points}</div>
-            <p className="text-xs text-textSecondary">+{points} from last week</p>
+            <div className="text-2xl font-bold">{userDetails.points}</div>
+            <p className="text-xs text-textSecondary">+{userDetails.points} from last week</p>
           </div>
         </Card>
         <Card className="backdrop-blur-sm bg-white/30 border-borderColor shadow-sm dark:bg-[#1C1C1E]">
@@ -31,8 +31,8 @@ function Stats({points}) {
             <ThumbsUp className="h-4 w-4 " />
           </div>
           <div className="p-3 pt-0">
-            <div className="text-2xl font-bold">42</div>
-            <p className="text-xs text-textSecondary">+8 from last week</p>
+            <div className="text-2xl font-bold">{userDetails.upvotes}</div>
+            <p className="text-xs text-textSecondary">+{userDetails.upvoteLastWeek} from last week</p>
           </div>
         </Card>
       </div>

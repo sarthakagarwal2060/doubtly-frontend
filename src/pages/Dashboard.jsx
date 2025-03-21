@@ -11,13 +11,12 @@ import LatestDoubts from "../components/dashboard/LatestDoubts";
 import LeaderBoard from "../components/dashboard/LeaderBoard";
 
 export default function Dashboard() {
-  const [username, setUsername] = useState([]);
-  const [points, setPoints] = useState([]);
+  const [userDetails, setUserDetails] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const fetchDetails = async () => {
       const response = await axios.get(
-        "https://doubtly-backend.onrender.com/api/userDetails/dashboard",
+        "https://doubtly-backend.onrender.com/api/userDetails",
         {
           headers: {
             "Content-Type": "application/json",
@@ -26,8 +25,7 @@ export default function Dashboard() {
           withCredentials: true,
         }
       );
-      setUsername(response.data.result.name);
-      setPoints(response.data.result.points);
+      setUserDetails(response.data.result);
     };
     fetchDetails();
   }, []);
@@ -42,9 +40,9 @@ export default function Dashboard() {
       <SideBar />
       <main className="pt-16 pl-72 pr-8 bg-primary">
         <div className="container py-6 space-y-8 ">
-          <WelcomeSec username={username} />
+          <WelcomeSec userDetails={userDetails} />
 
-          <Stats points={points} />
+          <Stats userDetails={userDetails} />
 
           <div className="flex justify-between">
             <div className="w-[70%]">
