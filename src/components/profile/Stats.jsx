@@ -14,11 +14,11 @@ function Stats({userDetails}) {
           <div className="grid grid-cols-2 gap-x-8 gap-y-2 mt-6">
             <Card>
                 <h2 className="text-sm">Doubts Posted</h2>
-                <Text className="text-2xl font-bold">{userDetails.doubts}</Text>
+                <Text className="text-2xl font-bold">{userDetails.doubtAsked}</Text>
             </Card>
             <Card>
                 <h2 className="text-sm">Answers Given</h2>
-                <Text className="text-2xl font-bold">{userDetails.answers}</Text>
+                <Text className="text-2xl font-bold">{userDetails.answersGiven}</Text>
             </Card>
             <Card>
                 <h2 className="text-sm">Total Points</h2>
@@ -26,7 +26,7 @@ function Stats({userDetails}) {
             </Card>
             <Card>
                 <h2 className="text-sm">Acceptance Rates</h2>
-                <Text className="text-2xl font-bold">{userDetails.acceptance}%</Text>
+                <Text className="text-2xl font-bold">{userDetails?.acceptance ?? 0}%</Text>
             </Card>
           </div>
         </div>

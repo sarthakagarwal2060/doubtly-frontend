@@ -6,20 +6,33 @@ import UserInfo from "../components/profile/UserInfo";
 import UserBio from "../components/profile/UserBio";
 import Stats from "../components/profile/Stats";
 import Tab from "../components/profile/Tab";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Profile() {
-  const user = [
-    { name: "Apurv Dugar", 
-      image: "/placeholder.svg", 
-      email: "apurv@gmail.com", 
-      joinedDate: "Jan, 2025", 
-      doubts: "10", 
-      answers: "20", 
-      points: "1200", 
-      bio: "Frontend developer passionate about React, and building great user experiences.", 
-      acceptance: "90",
-    },
-  ];
+
+  const [userDetails, setUserDetails] = useState([]);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const fetchDetails = async () => {
+      const response = await axios.get(
+        "https://doubtly-backend.onrender.com/api/userDetails",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
+      setUserDetails(response.data.result);
+    };
+    fetchDetails();
+  }, []);
+  
+  console.log(userDetails);
+
+  // const userDetails = {};
   return (
     <>
       <NavBar doubtly={false} searchBar={true} notification={true} profile={true} />
@@ -30,11 +43,11 @@ function Profile() {
             <ProfileHeader />
           </div>
           <div className="flex gap-8">
-            <UserInfo userDetails={user[0]}/>
+            <UserInfo userDetails={userDetails}/>
             <div className="flex flex-col gap-2">
-              <UserBio userDetails={user[0]}/>
+              <UserBio userDetails={userDetails}/>
               <Tab />
-              <Stats userDetails={user[0]} />
+              <Stats userDetails={userDetails} />
             </div>
           </div>
         </div>
