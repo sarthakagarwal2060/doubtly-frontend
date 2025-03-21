@@ -6,7 +6,7 @@ function UserInfo({userDetails}) {
   return (
     <>
       <Card >
-        <div className='flex flex-col items-center justify-center py-6 px-10'>
+        <div className='flex flex-col items-center justify-center py-6 px-12'>
 
           <div className='p-5'>
             <Avatar src={userDetails.image} fallback={userDetails?.fullName?.charAt(0)} color="blue" size="6" radius='large'></Avatar>
@@ -22,18 +22,18 @@ function UserInfo({userDetails}) {
 
           <div className="w-full space-y-4">
             <div className="flex items-center gap-2">
-              <Mail className="text-gray-900 h-4 w-4" />
+              <Mail className="text-gray-900 h-4 w-4 dark:text-white" />
               <span className="text-sm">{userDetails.email}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Calendar className="text-gray-900 h-4 w-4" />
+              <Calendar className="text-gray-900 h-4 w-4 dark:text-white" />
               <span className="text-sm">Joined {parseDateString(userDetails.joinedDate)}</span>
             </div>
           </div>
 
           <Separator size="4" className='m-8'/>
 
-          <div className="flex gap-8 w-full text-center">
+          {/* <div className="flex gap-8 w-full text-center">
             <div>
               <p className="text-xl font-bold">{userDetails.doubtAsked}</p>
               <Text className="text-xs text-gray-900">Doubts</Text>
@@ -46,7 +46,7 @@ function UserInfo({userDetails}) {
               <p className="text-xl font-bold">{userDetails.points}</p>
               <Text className="text-xs text-gray-900">Points</Text>
             </div>
-          </div>    
+          </div>     */}
         </div>
       </Card>
     </>

@@ -11,8 +11,8 @@ function Stats({userDetails}) {
             <MessageCircle className="h-4 w-4 " />
           </div>
           <div className="p-3 pt-0">
-            <div className="text-2xl font-bold">{userDetails.doubtAsked}</div>
-            <p className="text-xs text-textSecondary">+{userDetails.doubtAsked} from last week</p>
+            <div className="text-2xl font-bold">{userDetails.correctlyAnswered}</div>
+            <p className="text-xs text-textSecondary">+{userDetails.correctlyAnsweredLastweek} from last week</p>
           </div>
         </Card>
         <Card className="backdrop-blur-sm bg-white/30 border-borderColor shadow-sm dark:bg-[#1C1C1E]">

@@ -6,6 +6,7 @@ import UserInfo from "../components/profile/UserInfo";
 import Stats from "../components/profile/Stats";
 import Tab from "../components/profile/Tab";
 import fetchUserDetails from "../hooks/fetchUserDetails";
+import { Card } from "@radix-ui/themes";
 
 function Profile() {
 
@@ -23,12 +24,18 @@ function Profile() {
           <div>
             <ProfileHeader />
           </div>
-          <div className="flex gap-8">
-            <UserInfo userDetails={userDetails}/>
-            <div className="flex flex-col gap-2">
-              <Tab />
-              <Stats userDetails={userDetails} />
-            </div>
+          <div className="flex items-center justify-center">
+            <Card >
+              <div className="p-10">
+                <div className="flex gap-20">
+                  <UserInfo userDetails={userDetails}/>
+                  <div className="flex flex-col gap-10">
+                    <Tab />
+                    <Stats userDetails={userDetails} />
+                  </div>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </main>
