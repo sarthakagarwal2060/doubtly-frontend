@@ -33,7 +33,6 @@ function App() {
         <Route path="/dashboard/doubt/:doubtId" element={<ProtectedRoute><SolutionPage /></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <PostButton/>
       <ToastContainer 
         position="top-right"
         autoClose={3000}

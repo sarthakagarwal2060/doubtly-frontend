@@ -1,6 +1,7 @@
 import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import PostButton from "./PostButton";
 
 const ProtectedRoute = ({ children }) => {
   const [isValid, setIsValid] = useState(null);
@@ -115,7 +116,7 @@ const ProtectedRoute = ({ children }) => {
     return <div>Loading...</div>;
   }
 
-  return isValid ? <div key={key}>{children}</div> : <Navigate to="/login" />;
+  return isValid ? <div key={key}>{children}<PostButton/></div> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
