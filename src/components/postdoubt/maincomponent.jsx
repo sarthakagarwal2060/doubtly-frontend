@@ -1,43 +1,110 @@
 import HeadingOfSection from "./headingofsection";
 import Category from "./Category";
-import { useRef } from "react";
-import axios from "axios";
+import { Button, Card, Text, Box } from "@radix-ui/themes";
+import { handleSubmit } from "../../pages/PostDoubt";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useState } from "react";
 
-export default function MainComponent({titleRef, descriptionRef, categoryRef}) {
- 
+export default function MainComponent({
+  titleRef,
+  descriptionRef,
+  categoryRef,
+}) {
+  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="mx-auto w-2/3 p-8 bg-white shadow-lg rounded-lg">
-        <h2 className="text-2xl font-bold mb-8 text-center">Post a Doubt</h2>
-        <span className="block mb-8 text-center text-gray-600">
-          Share your question with the community.
-        </span>
-        <HeadingOfSection
-          name={"Doubt Title"}
-          placeholder={"Summarize your doubt in one line"}
-          className={
-            "w-full h-[50px] border-2 border-gray-400 rounded-md mb-6 p-2 transition duration-200 ease-in-out focus:border-blue-500"
-          }
-          ref={titleRef}
-        />
-        <HeadingOfSection
-          name={"Description"}
-          placeholder={
-            "Provide detailed context, what you've tried, and where you're stuck"
-          }
-          className={
-            "w-full h-[100px] border-2 border-gray-400 rounded-md mb-6 p-2 transition duration-200 ease-in-out focus:border-blue-500"
-          }
-          ref={descriptionRef}
-        />
-        <div className="mb-6">
-          <Category ref={categoryRef} />
-        </div>
+  const handleClick = async () => {
+    // Validate inputs
+    if (!titleRef.current?.value?.trim()) {
+      toast.error("Please enter a doubt title");
+      return;
+    }
+    if (!descriptionRef.current?.value?.trim()) {
+      toast.error("Please enter a description");
+      return;
+    }
+    if (!categoryRef.current?.value || categoryRef.current.value === "0") {
+      toast.error("Please select a category");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await handleSubmit(titleRef, descriptionRef, categoryRef);
+      console.log("Form submission response:", response);
       
+      if (response?.status === 200) {
+        toast.success("Doubt posted successfully!");
+        navigate("/dashboard");
+      } else {
+        toast.error("Failed to post doubt. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error in form submission:", error);
+      if (error.response?.status === 401) {
+        toast.error("Session expired. Please login again.");
+        navigate("/login");
+      } else {
+        toast.error(error.response?.data?.message || "Failed to post doubt. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleClose = () => {
+    navigate("/dashboard");
+  };
+
+  return (
+    <Card className="w-full bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-xl dark:bg-[#1C1C1E]">
+      <div className="flex justify-between items-center mb-4">
+        <Text size="6" weight="bold">Post a Doubt</Text>
+        <Button 
+          variant="ghost" 
+          onClick={handleClose}
+          className="text-gray-500 hover:text-gray-700"
+        >
+          ✕
+        </Button>
       </div>
-    </div>
+
+      <HeadingOfSection
+        name="Doubt Title"
+        placeholder="Summarize your doubt in one line"
+        ref={titleRef}
+      />
+
+      <HeadingOfSection
+        name="Description"
+        placeholder="Provide detailed context, what you've tried, and where you're stuck"
+        isLarge={true}
+        ref={descriptionRef}
+      />
+
+      <Box className="mb-6">
+        <Category ref={categoryRef} />
+      </Box>
+
+      <Box className="flex justify-end gap-3">
+        <Button 
+          size="3" 
+          variant="soft"
+          onClick={handleClose}
+          disabled={isSubmitting}
+        >
+          Cancel
+        </Button>
+        <Button 
+          size="3" 
+          color="blue"
+          onClick={handleClick}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Posting..." : "Post Doubt"}
+        </Button>
+      </Box>
+    </Card>
   );
 }
-
-

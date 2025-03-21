@@ -1,16 +1,19 @@
 import { Card, Badge } from "@radix-ui/themes";
 import { MessageCircle, ThumbsUp, Clock } from "lucide-react";
 
-function DoubtCard({ title, tags, username, answerCount, upvotes, timeAgo, className }) {
+function DoubtCard({ title, tags, username, answerCount, upvotes, timeAgo, className, onClick }) {
 
   return (
     <>
-      <Card className="backdrop-blur-sm bg-white/30 border-borderColor shadow-sm hover:shadow-md transition-shadow">
+      <Card 
+        className={`backdrop-blur-sm bg-white/30 border-borderColor shadow-sm hover:shadow-md transition-shadow cursor-pointer dark:bg-[#1C1C1E] ${className || ''}`}
+        onClick={onClick}
+      >
         
         <div className="space-y-2 p-3 pb-6">
           <div className="flex gap-2">
             {tags.map((tag) => (
-              <Badge key={tag} radius="full" className="text-xs p-24">
+              <Badge key={tag} radius="full" className={`text-xs p-24 ${tag==="ai/ml"? "uppercase" : "capitalize"}`}>
                 {tag}
               </Badge>
             ))}
