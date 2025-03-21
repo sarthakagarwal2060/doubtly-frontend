@@ -1,6 +1,7 @@
 import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loader from "./Loader";
 
 const PublicRoute = ({ children }) => {
   const [isValid, setIsValid] = useState(null);
@@ -77,7 +78,7 @@ const PublicRoute = ({ children }) => {
   }, [token]);
 
   if (isValid === null) {
-    return <div>Loading...</div>;
+    return <div><Loader /></div>;
   }
 
   return isValid ? <Navigate to="/dashboard" /> : children;

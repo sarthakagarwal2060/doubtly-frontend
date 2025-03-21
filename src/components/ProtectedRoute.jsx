@@ -2,6 +2,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PostButton from "./PostButton";
+import Loader from "./Loader";
 
 const ProtectedRoute = ({ children }) => {
   const [isValid, setIsValid] = useState(null);
@@ -113,7 +114,7 @@ const ProtectedRoute = ({ children }) => {
   }, [token, navigate]);
 
   if (isValid === null) {
-    return <div>Loading...</div>;
+    return <div><Loader /></div>;
   }
 
   return isValid ? <div key={key}>{children}<PostButton/></div> : <Navigate to="/login" />;
