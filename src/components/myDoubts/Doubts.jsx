@@ -7,7 +7,7 @@ function Doubts({myDoubts}) {
   const navigate = useNavigate();
 
   function handleDoubtClick(doubt) {
-    navigate(`/dashboard/doubt/${doubt._id}`);
+    navigate(`/dashboard/doubt/${doubt.id}`);
   }
 
   return (
