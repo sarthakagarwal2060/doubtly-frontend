@@ -15,7 +15,7 @@ function SideBar() {
   const navigate = useNavigate();
   const topMenuItems = [
     { icon: Home, label: "Home", href: "/dashboard" },
-    { icon: PlusCircle, label: "Post a Doubt", href: "/dashboard/postdoubt" },
+    // { icon: PlusCircle, label: "Post a Doubt", href: "/dashboard/postdoubt" },
     { icon: GalleryVerticalEnd, label: "All Doubts", href: "/dashboard/allDoubts" },
     { icon: MessageCircle, label: "My Doubts", href: "/dashboard/mydoubts" },
     { icon: Trophy, label: "Leaderboard", href: "/dashboard/leaderboard" },

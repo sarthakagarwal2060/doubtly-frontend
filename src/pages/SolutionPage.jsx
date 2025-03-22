@@ -273,7 +273,7 @@ function SolutionPage() {
           <Card className="bg-white/50 dark:bg-gray-800/50 hover:bg-white/80 dark:hover:bg-gray-800/80 p-6">
             <div className='p-6'>
               <h3 className="mb-4 font-bold text-xl dark:text-white">Post Your Solution</h3>
-              <textArea 
+              <textarea 
                 placeholder="Share your solution or approach..."
                 ref={solutionRef}
                 className="min-h-[300px] min-w-full mb-4 resize-none p-2 start-0 bg-white/50 border-[1px] border-gray-300 dark:bg-gray-700/50 dark:text-white dark:placeholder:text-gray-400"
