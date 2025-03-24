@@ -1,11 +1,13 @@
 import React from "react";
 import { Button } from "@radix-ui/themes";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../components/Landing/NavBar";
+import Section1 from "../components/Landing/Section1";
 function Landing() {
   const navigate = useNavigate();
   return (
     <>
-      <div className="flex flex-col items-center justify-center min-h-screen gap-2 bg-primary">
+      {/* <div className="flex flex-col items-center justify-center min-h-screen gap-2 bg-primary">
         <h2 className="text-4xl font-extrabold">Welcome to Doubtly</h2>
         <span className="text-md font-normal text-textSecondary">
           A community-driven platform to share and resolve your doubts
@@ -15,7 +17,9 @@ function Landing() {
             Post a Doubt
             </Button>
         </div>
-      </div> 
+      </div>  */}
+      <NavBar />
+      <Section1 />
     </>
   );
 }
