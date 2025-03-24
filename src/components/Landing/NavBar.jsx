@@ -1,7 +1,9 @@
 import { Button } from "@radix-ui/themes";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function NavBar() {
+    const navigate = useNavigate();
   return (
     <>
       <nav>
@@ -11,8 +13,8 @@ function NavBar() {
               <h1 className="text-2xl font-bold ">Doubtly</h1>
             </div>
             <div className="flex gap-4 text-md">
-              <Button size="2" color="transparent" variant="soft" > Log in </Button>
-              <Button size="2" color="blue"> Sign up </Button>
+              <Button size="2" color="transparent" variant="soft" onClick={() => navigate("/login")}> Log in </Button>
+              <Button size="2" color="blue" onClick={() => navigate("/signup")}> Sign up </Button>
             </div>
           </div>
         </div>
