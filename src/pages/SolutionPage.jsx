@@ -189,12 +189,12 @@ function SolutionPage() {
     <>
       <NavBar doubtly={false} searchBar={false} notification={true} profile={true}/>
       <SideBar />
-      <main className="pt-16 pl-72 pr-8 min-h-screen bg-primary flex flex-col dark:bg-[#1c1c1e]">
+      <main className="pt-16 pl-72 pr-8 min-h-screen bg-primary flex flex-col dark:bg-[#121212]">
         <div className="container w-[70%] py-6 space-y-8 flex-grow">
           
           {/* Doubt Card */}
           <div>
-            <div className="space-y-3 dark:bg-[#1c1c1e]">
+            <div className="space-y-3 dark:bg-[#121212]">
               <div>
                 <Text size="6" weight="bold" className="text-gray-900 dark:text-white">
                   {currentDoubt.title || 'Untitled Doubt'}
@@ -206,7 +206,7 @@ function SolutionPage() {
               </div>
               <div className="flex items-center justify-end gap-1">
                 <Text size="3">Posted by </Text>
-                <Text size="3" weight="bold" className="dark:text-white">{currentDoubt.username || 'Unknown'}</Text>
+                <Text size="3" weight="bold" className="dark:text-white ">{currentDoubt.username || 'Unknown'}</Text>
               </div>
 
 
@@ -240,7 +240,7 @@ function SolutionPage() {
             ) : (
               <div className="space-y-4">
                 {solutions.map((solution, index) => (
-                  <Card key={index} className="bg-white/50 dark:bg-gray-800/50 hover:bg-white/80 dark:hover:bg-gray-800/80 transition-colors p-6">
+                  <Card key={index} className="bg-white/50  hover:bg-white/80 transition-colors p-6 dark:bg-[#1C1C1E]">
                     <Flex direction="column" gap="4">
                       <Text className="text-gray-700 dark:text-gray-300">{solution.solution}</Text>
                       <Flex align="center" justify="between">
@@ -270,13 +270,13 @@ function SolutionPage() {
 
           {/* Post Solution Section */}
           <div className='mt-24 p-8'></div>
-          <Card className="bg-white/50 dark:bg-gray-800/50 hover:bg-white/80 dark:hover:bg-gray-800/80 p-6">
-            <div className='p-6'>
-              <h3 className="mb-4 font-bold text-xl dark:text-white">Post Your Solution</h3>
+          <Card className="bg-white/50  hover:bg-white/80  p-6 dark:bg-[#1C1C1E] ">
+            <div className='p-6 '>
+              <h3 className="mb-4 font-bold text-xl  dark:text-white">Post Your Solution</h3>
               <textarea 
                 placeholder="Share your solution or approach..."
                 ref={solutionRef}
-                className="min-h-[300px] min-w-full mb-4 resize-none p-2 start-0 bg-white/50 border-[1px] border-gray-300 dark:bg-gray-700/50 dark:text-white dark:placeholder:text-gray-400"
+                className="min-h-[300px] min-w-full mb-4 resize-none p-2 start-0 bg-white/50 border-[1px] border-gray-300 dark:bg-[#1C1C1E] dark:text-white dark:placeholder:text-gray-400"
               />
               <Flex gap="3" justify="end">
                 <Button variant="soft" onClick={handleClose} disabled={submitting} className="dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white">Cancel</Button>

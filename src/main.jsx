@@ -8,7 +8,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
     <Theme>
-      <App className ="dark:text-black dark:bg-[#1C1C1E]"/>
+      <App className ="dark:text-black dark:bg-[#121212]"/>
     </Theme>
     </BrowserRouter>
   </StrictMode>

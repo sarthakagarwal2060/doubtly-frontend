@@ -32,7 +32,7 @@ function SideBar() {
 
   return (
     <>
-      <div className="fixed top-16 bottom-0 z-50 w-64 bg-primary border-r border-borderColor py-4 px-2 transition-transform duration-200 ease-in-out dark:bg-[#1C1C1E] dark:border-[#414749]">
+      <div className="fixed top-16 bottom-0 z-50 w-64 bg-primary border-r border-borderColor py-4 px-2 transition-transform duration-200 ease-in-out dark:bg-[#121212] dark:border-[#414749]">
         <div className="h-full flex flex-col justify-between">
           <ScrollArea className="flex-1 dark:text-white">
             <div className="flex flex-col dark:text-white">
