@@ -15,7 +15,7 @@ function Section1() {
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
                 Solve Doubts Together
               </h1>
-              <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+              <p className="md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-[#65758B]">
                 Join the community of students helping each other. Post your doubts, 
                 answer questions, and earn points on the leaderboard.
               </p>

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import NavBar from "../components/Landing/NavBar";
 import Section1 from "../components/Landing/Section1";
 import Section2 from "../components/Landing/Section2";
+import Section3 from "../components/Landing/Section3";
+import Footer from "../components/Landing/Footer";
 function Landing() {
   const navigate = useNavigate();
   return (
@@ -22,6 +24,8 @@ function Landing() {
       <NavBar />
       <Section1 />
       <Section2 />
+      <Section3 />
+      <Footer />
     </>
   );
 }
