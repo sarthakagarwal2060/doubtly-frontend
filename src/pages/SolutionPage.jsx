@@ -232,7 +232,7 @@ function SolutionPage() {
             <Text size="5" weight="bold" className="dark:text-white">Solutions ({solutions.length})</Text>
             
             {solutions.length === 0 ? (
-              <Card className="bg-white/50 dark:bg-gray-800/50 p-8 text-center">
+              <Card className="bg-white/50  p-8 text-center dark:bg-[#1C1C1E]">
                 <Text size="3" color="gray" className="mb-2 dark:text-gray-300">No solutions yet</Text>
                 <br />
                 <Text size="2" color="gray" className="dark:text-gray-400">Be the first one to help solve this doubt!</Text>
