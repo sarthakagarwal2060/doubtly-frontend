@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function TrendingDoubts() {
+export default function TrendingDoubts() {
   const navigate = useNavigate();
   const [trendingDoubts, setTrendingDoubts] = useState([]);
 
@@ -58,5 +58,3 @@ function TrendingDoubts() {
     </>
   );
 }
-
-export default TrendingDoubts;
