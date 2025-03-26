@@ -12,7 +12,7 @@ function NavBar({doubtly, searchBar, notification, profile}) {
     localStorage.removeItem("token");
     navigate("/");
   } ;
-  const userDetails = fetchUserDetails();
+  const { userDetails, loading } = fetchUserDetails(); 
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between bg-primary px-4 border-b border-borderColor dark:bg-[#121212] dark:border-[#414749] bg-white">

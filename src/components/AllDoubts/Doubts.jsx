@@ -4,10 +4,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DoubtCard from "../dashboard/DoubtCard";
 import { Flex, Select } from "@radix-ui/themes";
+import Loader from "../Loader";
 
 function Doubts() {
   const navigate = useNavigate();
   const [allDoubts, setAllDoubts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   function handleDoubtClick(doubt) {
     navigate(`/dashboard/doubt/${doubt.id}`);
@@ -16,6 +18,7 @@ function Doubts() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const fetchAllDoubts = async () => {
+      setLoading(true);
       const response = await axios.get(
         "https://doubtly-backend.onrender.com/api/doubt/showAll",
         {
@@ -26,9 +29,14 @@ function Doubts() {
         }
       );
       setAllDoubts(response.data.result);
+      setLoading(false);
     };
     fetchAllDoubts();
   }, []);
+
+  if (loading) {
+    return <div><Loader /></div>;
+  }
 
   return (
     <>
