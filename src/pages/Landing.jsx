@@ -21,11 +21,13 @@ function Landing() {
             </Button>
         </div>
       </div>  */}
+      <div className="bg-white text-black">
       <NavBar />
       <Section1 />
       <Section2 />
       <Section3 />
       <Footer />
+      </div>
     </>
   );
 }
