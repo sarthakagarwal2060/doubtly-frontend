@@ -8,9 +8,10 @@ import TrendingDoubts from "../components/dashboard/TrendingDoubts";
 import LatestDoubts from "../components/dashboard/LatestDoubts";
 import LeaderBoard from "../components/dashboard/LeaderBoard";
 import fetchUserDetails from "../hooks/fetchUserDetails";
+import Loader from "../components/Loader";
 
 export default function Dashboard() {
-  const userDetails = fetchUserDetails();
+  const { userDetails, loading } = fetchUserDetails(); 
   return (
     <>
       <NavBar
