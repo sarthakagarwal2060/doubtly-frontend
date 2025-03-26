@@ -17,7 +17,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import AllDoubts from "./pages/AllDoubts";
 import PostButton from "./components/PostButton"
 import PublicRoute from "./components/PublicRoute";
+import { useState ,useEffect} from "react";
 function App() {
+  const [currenttheme,setTheme] = useState(localStorage.getItem('theme'))
+  useEffect(()=>{
+    setTheme(localStorage.getItem("theme"))
+  }
+  ,[]
+  )
+  
+
   return (
     <>
       <Routes>
@@ -43,7 +52,7 @@ function App() {
         pauseOnFocusLoss={false}
         draggable={false}
         pauseOnHover={false}
-        theme="light"
+        theme={currenttheme}
       />
 
     </>
