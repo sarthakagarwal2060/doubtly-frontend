@@ -19,7 +19,12 @@ function fetchUserDetails() {
           withCredentials: true,
         }
       );
-      setUserDetails(response.data.result);
+      const fetchedDetails = response.data.result;
+      setUserDetails(fetchedDetails);
+      localStorage.setItem("firstName", fetchedDetails.firstName);
+      localStorage.setItem("email", fetchedDetails.email);
+      localStorage.setItem("fullName", fetchedDetails.fullName);
+      localStorage.setItem("joinedDate", fetchedDetails.joinedDate);
       setLoading(false);
     };
     fetchDetails();

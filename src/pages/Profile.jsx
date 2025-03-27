@@ -14,9 +14,9 @@ function Profile() {
 
   console.log(userDetails);
   
-  if (loading) {
-    return <Loader />;
-  }
+  // if (loading) {
+  //   return <Loader />;
+  // }
 
   return (
     <>

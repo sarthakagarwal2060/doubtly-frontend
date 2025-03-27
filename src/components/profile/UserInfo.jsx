@@ -9,9 +9,9 @@ function UserInfo({userDetails}) {
         <div className='flex flex-col items-center justify-center py-6 px-12'>
 
           <div className='p-5'>
-            <Avatar src={userDetails.image} fallback={userDetails?.fullName?.charAt(0)} color="blue" size="6" radius='large'></Avatar>
+            <Avatar src={userDetails.image} fallback={(localStorage.getItem("fullName"))?.charAt(0)} color="blue" size="6" radius='large'></Avatar>
           </div>
-          <h1 className='font-bold text-2xl'>{userDetails.fullName}</h1>
+          <h1 className='font-bold text-2xl'>{localStorage.getItem("fullName")}</h1>
 
           {/* <div className='flex gap-4 mt-4'>
             <Button color='gray' size="3">XXXX</Button>
@@ -23,11 +23,11 @@ function UserInfo({userDetails}) {
           <div className="w-full space-y-4">
             <div className="flex items-center gap-2">
               <Mail className="text-gray-900 h-4 w-4 dark:text-white" />
-              <span className="text-sm">{userDetails.email}</span>
+              <span className="text-sm">{localStorage.getItem("email")}</span>
             </div>
             <div className="flex items-center gap-2">
               <Calendar className="text-gray-900 h-4 w-4 dark:text-white" />
-              <span className="text-sm">Joined {parseDateString(userDetails.joinedDate)}</span>
+              <span className="text-sm">Joined {parseDateString(localStorage.getItem("joinedDate"))}</span>
             </div>
           </div>
 
