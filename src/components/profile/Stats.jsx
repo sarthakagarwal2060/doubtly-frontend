@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Tabs, Text } from "@radix-ui/themes";
+import { Loader } from "lucide-react";
 
 function Stats({userDetails}) {
   return (
@@ -14,7 +15,7 @@ function Stats({userDetails}) {
           <div className="grid grid-cols-2 gap-x-8 gap-y-8 mt-6">
             <Card>
                 <h2 className="text-sm">Doubts Posted</h2>
-                <Text className="text-2xl font-bold">{userDetails.doubtAsked}</Text>
+                <Text className="text-2xl font-bold">{userDetails?.doubtAsked}</Text>
             </Card>
             <Card>
                 <h2 className="text-sm">Answers Given</h2>
