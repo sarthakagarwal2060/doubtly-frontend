@@ -20,13 +20,9 @@ export default function CompleteLeaderBoard() {
     };
 
     return (
-        <div className="max-w-[1200px] mx-auto p-5">
-            <div className="p-5 rounded-xl border border-indigo-100 ">
-                <div className="mb-5">
-                    <Text size="6" weight="bold">Complete Leaderboard</Text>
-                    <br />
-                    <Text size="3" className="text-gray-600 dark:text-white">All users ranked by contribution points</Text>
-                </div>
+        <div className="max-w-[1200px] mx-auto p-5  ">
+            <div className="p-5 rounded-xl border border-indigo-100 bg-gray-100 shadow-sm dark:bg-gray-800 dark:text-black dark:border-gray-500">
+
 
                 <Table.Root>
                     <Table.Header>
@@ -52,7 +48,7 @@ export default function CompleteLeaderBoard() {
                                         <img 
                                             src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=random`}
                                             alt={`${user.name}'s avatar`}
-                                            className="w-[30px] h-[30px] rounded-full object-cover border border-gray-200"
+                                            className="w-[30px] h-[30px] rounded-full object-cover border border-gray-200 "
                                         />
                                         <Text>{user.name}</Text>
                                     </Flex>

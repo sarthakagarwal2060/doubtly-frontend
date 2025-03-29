@@ -17,7 +17,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import AllDoubts from "./pages/AllDoubts";
 import PostButton from "./components/PostButton"
 import PublicRoute from "./components/PublicRoute";
-import { useState ,useEffect} from "react";
+
+import SearchPage from "./pages/SearchPage";
+
+
+
+
 function App() {
   const [currenttheme,setTheme] = useState(localStorage.getItem('theme'))
   useEffect(()=>{
@@ -40,6 +45,7 @@ function App() {
         <Route path="/dashboard/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
         <Route path="/dashboard/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/dashboard/doubt/:doubtId" element={<ProtectedRoute><SolutionPage /></ProtectedRoute>} />
+        <Route path="/Search/SearchPage" element={<ProtectedRoute><SearchPage/></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer 
