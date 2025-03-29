@@ -81,12 +81,14 @@ function Doubts() {
           </div>
           <div className="grid gap-4">
 
-            {(filterSubject === "all" || filterDoubt === "all") ? allDoubts.map((doubt) => (
-              <DoubtCard
-                key={doubt._id || doubt.title}
-                {...doubt}
-                onClick={() => handleDoubtClick(doubt)}
-              />
+            {(filterDoubt === "all") ? allDoubts.map((doubt) => (
+              filterSubject === "all" || doubt.tags.includes(filterSubject) ? (
+                <DoubtCard
+                  key={doubt._id || doubt.title}
+                  {...doubt}
+                  onClick={() => handleDoubtClick(doubt)}
+                />
+              ) : null
             )) : (filterDoubt === "latest") ? allDoubts.sort((a, b) => new Date(b.date) - new Date(a.date))
                 .map((doubt) => (
                   filterSubject === "all" || doubt.tags.includes(filterSubject) ? (
