@@ -22,7 +22,7 @@ function Landing() {
         </div>
       </div>  */}
       <div className="bg-white text-black">
-      <NavBar />
+      <NavBar doubtly={true} login={true}/>
       <Section1 />
       <Section2 />
       <Section3 />
