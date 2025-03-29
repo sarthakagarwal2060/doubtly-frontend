@@ -53,7 +53,7 @@ function App() {
         pauseOnFocusLoss={false}
         draggable={false}
         pauseOnHover={false}
-        theme=light
+        theme="light"
       />
 
     </>
