@@ -22,7 +22,7 @@ function Doubts() {
     const fetchAllDoubts = async () => {
       setLoading(true);
       const response = await axios.get(
-        "https://doubtly-backend.onrender.com/api/doubt/showAll",
+        "https://doubtly-backend.onrender.com/api/doubt/show",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -39,6 +39,12 @@ function Doubts() {
   if (loading) {
     return <div><Loader /></div>;
   }
+  console.log(allDoubts);
+  allDoubts.forEach
+  ((doubt) => {
+    console.log(doubt.date); // Log the tags array for each doubt
+  } 
+  )
   
   return (
     <>
@@ -62,29 +68,45 @@ function Doubts() {
                 <option value="ai/ml">AI/ML</option>
                 <option value="maths">Maths</option>
               </select>
-              <select className="text-black dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg p-2" id="filterDoubt">  
+              <select className="text-black dark:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg p-2" id="filterDoubt"
+                onChange={(e) => {
+                  setFilterDoubt(e.target.value);
+                }}
+              >  
                 <option value="all">Filter Doubt</option>
-                <option value="trending">Trending</option>
+                <option value="latest">Latest</option>
                 <option value="unanswered">Unanswered</option>
               </select>
             </Flex>
           </div>
           <div className="grid gap-4">
 
-            {filterSubject === "all" ? allDoubts.map((doubt) => (
+            {(filterSubject === "all" || filterDoubt === "all") ? allDoubts.map((doubt) => (
               <DoubtCard
                 key={doubt._id || doubt.title}
                 {...doubt}
                 onClick={() => handleDoubtClick(doubt)}
               />
-            )) : allDoubts.map((doubt) => (
-              doubt.tags.includes(filterSubject) ? 
-              <DoubtCard
-                key={doubt._id || doubt.title}
-                {...doubt}
-                onClick={() => handleDoubtClick(doubt)}
-              /> : null
-            ))}
+            )) : (filterDoubt === "latest") ? allDoubts.sort((a, b) => new Date(b.date) - new Date(a.date))
+                .map((doubt) => (
+                  filterSubject === "all" || doubt.tags.includes(filterSubject) ? (
+                    <DoubtCard
+                      key={doubt._id || doubt.title}
+                      {...doubt}
+                      onClick={() => handleDoubtClick(doubt)}
+                    />
+                  ) : null
+              )) :
+              allDoubts.filter((doubt) => doubt.answerCount === 0)
+              .map((doubt) => (
+                filterSubject === "all" || doubt.tags.includes(filterSubject) ? (
+                  <DoubtCard
+                    key={doubt._id || doubt.title}
+                    {...doubt}
+                    onClick={() => handleDoubtClick(doubt)}
+                  />
+                ) : null
+              ))}
             
           </div>
         </div>
