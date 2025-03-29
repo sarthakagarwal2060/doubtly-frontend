@@ -7,7 +7,7 @@ function Section1() {
   const navigate = useNavigate();
   return (
     <>
-      <section className="py-20 md:py-32 px-20 md:px-32 bg-[#F7F9FA]">
+      <section className="py-20 md:py-32 flex items-center justify-center bg-[#F7F9FA]">
         <div className="container px-4 md:px-6">
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
             <div className="space-y-4 animate-fade-in" style={{ animationDelay: "300ms" }}>

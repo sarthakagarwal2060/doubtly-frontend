@@ -15,7 +15,7 @@ function Section2() {
 
   return (
     <>
-        <section className="py-16 md:py-20 px-20 md:px-32 bg-white">
+        <section className="py-16 md:py-20 flex items-center justify-center bg-white">
         <div className="container px-4 md:px-6">
           <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-3xl font-bold tracking-tight mb-2">Key Features</h2>
