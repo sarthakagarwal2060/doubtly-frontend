@@ -1,6 +1,6 @@
 import { Card } from "@radix-ui/themes";
 import React from "react";
-import Mehul from "../../assets/Team/Mehul.png";
+import Mehul from "../../assets/Team/mehul.png";
 import Sarthak from "../../assets/Team/sarthak.png";
 import Narendra from "../../assets/Team/narendra.jpg";
 import Apurv from "../../assets/Team/apurv.jpg";
