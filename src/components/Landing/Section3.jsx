@@ -6,7 +6,7 @@ function Section3() {
     // console.log(emailId);
   return (
     <>
-      <section className="py-16 px-20 md:px-32 bg-blue-50">
+      <section className="py-16 flex items-center justify-center bg-blue-50">
         <div className="container px-4 md:px-6 text-center">
           <div className="mx-auto max-w-2xl space-y-4 animate-fade-in">
             <h2 className="text-3xl font-bold tracking-tight">Ready to Join Doubtly?</h2>
