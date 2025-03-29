@@ -17,6 +17,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import AllDoubts from "./pages/AllDoubts";
 import PostButton from "./components/PostButton"
 import PublicRoute from "./components/PublicRoute";
+import Team from "./components/Landing/Team";
 
 import SearchPage from "./pages/SearchPage";
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/" element={<PublicRoute><Landing /></PublicRoute>} />
         <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
+        <Route path="/team" element={<PublicRoute><Team /></PublicRoute>} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/dashboard/postdoubt" element={<ProtectedRoute><PostDoubt /></ProtectedRoute>} />
         <Route path="/dashboard/alldoubts" element={<ProtectedRoute><AllDoubts /></ProtectedRoute>} />
