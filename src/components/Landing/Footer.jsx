@@ -15,7 +15,7 @@ function Footer() {
               <Link to="#" className="hover:underline hover:text-primary">Terms</Link>
               <Link to="#" className="hover:underline hover:text-primary">Privacy</Link>
               <Link to="#" className="hover:underline hover:text-primary">About</Link>
-              <Link to="#" className="hover:underline hover:text-primary">Contact</Link>
+              <Link to="/team" className="hover:underline hover:text-primary">Team</Link>
             </div>
             <div>
                 <span className="font-semibold text-white">Doubtly</span>
