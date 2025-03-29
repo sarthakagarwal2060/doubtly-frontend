@@ -24,12 +24,7 @@ import SearchPage from "./pages/SearchPage";
 
 
 function App() {
-  const [currenttheme,setTheme] = useState(localStorage.getItem('theme'))
-  useEffect(()=>{
-    setTheme(localStorage.getItem("theme"))
-  }
-  ,[]
-  )
+
   
 
   return (
@@ -58,7 +53,7 @@ function App() {
         pauseOnFocusLoss={false}
         draggable={false}
         pauseOnHover={false}
-        theme={currenttheme}
+        theme=light
       />
 
     </>
