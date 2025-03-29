@@ -43,7 +43,7 @@ function SideBar() {
                     className={`flex gap-2 items-center w-full px-3 py-2 pt-4 text-black  hover:bg-[rgba(224,238,251,0.3)] 
                    dark:hover:bg-[rgba(30, 72, 136, 0.3)]
                       rounded-md ${
-                      isActive(item.href) ? "bg-[#e0eefb] dark:bg-[#2563EB]" : ""
+                      isActive(item.href) ? "bg-[#d0e3f4] dark:bg-[#2563EB]" : ""
                     }`}
                   >
                     <item.icon className="mr-2 h-4 w-4 text-black dark:text-white" />

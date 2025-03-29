@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Box, Text, Flex } from "@radix-ui/themes";
-
+import UserCard from './UserCard';
 export default function TopPerformer() {
     const topUsers = [
         { id: 1, name: "Sarthak Agarwal", points: 1250, solutions: 78, doubts: 42, rank: 1, avatar: "" },
@@ -16,44 +16,30 @@ export default function TopPerformer() {
     };
 
     return (
-        <div className="max-w-[1200px] mx-auto p-5 ">
-            <div className="text-center mb-10">
-                <Text size="8" weight="bold" className="text-gray-800 dark:text-white">Leaderboard</Text>
-            </div>
-            <Flex gap="4" wrap="wrap" justify="center" className="mb-10">
-                {topUsers.map((user) => (
-                    <div key={user.id} className="w-[300px] p-5 rounded-xl border border-indigo-100 flex flex-col items-center ">
-                        <div className="relative mb-2.5">
-                            <img 
-                                src={user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.name)}&background=random&size=100`}
-                                alt={`${user.name}'s avatar`}
-                                className="w-[100px] h-[100px] rounded-full object-cover border-3 border-purple-100"
-                            />
-                            
-                            <div className="absolute top-0 right-0 bg-white rounded-full p-1.5 shadow-sm">
-                                {getRankIcon(user.rank)}
-                            </div>
-                        </div>
+        <div className="max-w-[1200px] mx-auto p-5">
+        <div className="text-center mb-10">
+            <Text size="8" weight="bold" className="text-gray-800 dark:text-white">Leaderboard</Text>
+        </div>
 
-                        <Text size="5" weight="bold" className="mb-1.5">{user.name}</Text>
-                        <Flex align="center" className="text-purple-600 mb-4">
-                            <Text size="3" className="mr-1.5">★</Text>
-                            <Text size="3">{user.points} points</Text>
-                        </Flex>
+    
+        <Flex gap="6" justify="center" align="end" wrap="wrap" className="mb-10">
 
-                        <Flex gap="4">
-                            <div className="text-center">
-                                <Text size="5" weight="bold">{user.solutions}</Text>
-                                <Text size="2" className="text-gray-600 dark:text-white"> Solutions</Text>
-                            </div>
-                            <div className="text-center">
-                                <Text size="5" weight="bold">{user.doubts}</Text>
-                                <Text size="2" className="text-gray-600 dark:text-white"> Doubts</Text>
-                            </div>
-                        </Flex>
-                    </div>
-                ))}
-            </Flex>
+        
+            {topUsers.filter(user => user.rank === 2).map(user => (
+                <UserCard key={user.id} user={user} className="w-[250px] md:w-[280px] bg-gray-200 dark:bg-gray-800 shadow-md" />
+            ))}
+
+         
+            {topUsers.filter(user => user.rank === 1).map(user => (
+                <UserCard key={user.id} user={user} className="w-[300px] md:w-[320px]  bg-gray-200 dark:bg-gray-800 shadow-lg scale-110" />
+            ))}
+
+         
+            {topUsers.filter(user => user.rank === 3).map(user => (
+                <UserCard key={user.id} user={user} className="w-[250px] md:w-[280px] bg-gray-200 dark:bg-gray-800 shadow-md" />
+            ))}
+
+        </Flex>
         </div>
     );
 }
