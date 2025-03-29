@@ -26,13 +26,19 @@ function Login() {
         }
       );
       console.log(res);
+     
       if (res.status === 200) {
         localStorage.setItem("token", res.data.token);
-        toast("Logged in successfully!");
+        toast.success("Logged in successfully!");
         navigate("/dashboard");
       }
     } catch (err) {
       console.log(err);
+      
+       if (err.status === 400) {
+         toast.error(err.response.data.message);
+        //  console.log(err.response.data.message);
+       }
     }
   }
   return (

@@ -13,7 +13,7 @@ function NavBar({doubtly, searchBar, notification, profile}) {
     localStorage.removeItem("token");
     navigate("/");
   } ;
-  const userDetails = fetchUserDetails();
+  const { userDetails, loading } = fetchUserDetails(); 
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 flex h-16 items-center justify-between bg-primary px-4 border-b border-borderColor dark:bg-[#121212] dark:border-[#414749] bg-white">
@@ -47,7 +47,7 @@ function NavBar({doubtly, searchBar, notification, profile}) {
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full" color="blue">
                   <Avatar
                     // src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?&w=256&h=256&q=70&crop=focalpoint&fp-x=0.5&fp-y=0.3&fp-z=1&fit=crop"
-                    fallback={userDetails.fullName?.charAt(0)}
+                    fallback={(localStorage.getItem("fullName"))?.charAt(0)}
                   />
                   {/* <Avatar fallback="A" /> */}
                 </Button>
@@ -55,8 +55,8 @@ function NavBar({doubtly, searchBar, notification, profile}) {
               <DropdownMenu.Content className="w-56" align="end" color="blue">
                 <DropdownMenu.Label className="font-normal">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">{userDetails.fullName}</p>
-                    <p className="text-xs leading-none ">{userDetails.email}</p>
+                    <p className="text-sm font-medium leading-none">{localStorage.getItem("fullName")}</p>
+                    <p className="text-xs leading-none ">{localStorage.getItem("email")}</p>
                   </div>
                 </DropdownMenu.Label>
                 <DropdownMenu.Separator />

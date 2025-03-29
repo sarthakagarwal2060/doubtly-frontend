@@ -23,11 +23,14 @@ function Signup() {
       );
       console.log(res);
       if (res.status === 200) {
-        toast("Account created successsfully!")
+        toast.success("Account created successsfully!")
         navigate("/login");
         
       }
     } catch (err) {
+      if(err.status==400){
+        toast.error(err.response.data.message)
+      }
       console.log(err);
     }
   }

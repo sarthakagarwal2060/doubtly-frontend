@@ -7,14 +7,17 @@ import Stats from "../components/profile/Stats";
 import Tab from "../components/profile/Tab";
 import fetchUserDetails from "../hooks/fetchUserDetails";
 import { Card } from "@radix-ui/themes";
+import Loader from "../components/Loader";
 
 function Profile() {
+  const { userDetails, loading } = fetchUserDetails(); 
 
-  const userDetails = fetchUserDetails();
-  
   console.log(userDetails);
+  
+  // if (loading) {
+  //   return <Loader />;
+  // }
 
-  // const userDetails = {};
   return (
     <>
       <NavBar doubtly={false} searchBar={true} notification={true} profile={true} />
@@ -25,10 +28,10 @@ function Profile() {
             <ProfileHeader />
           </div>
           <div className="flex items-center justify-center">
-            <Card >
+            <Card>
               <div className="p-10">
                 <div className="flex gap-20">
-                  <UserInfo userDetails={userDetails}/>
+                  <UserInfo userDetails={userDetails} />
                   <div className="flex flex-col gap-10">
                     <Tab />
                     <Stats userDetails={userDetails} />
