@@ -2,9 +2,9 @@ import { Card, Avatar } from "@radix-ui/themes";
 
 function LeaderBoard() {
   const topUsers = [
-    { name: "Sarah Johnson", points: 2456, image: "/placeholder.svg" },
-    { name: "Mike Smith", points: 2123, image: "/placeholder.svg" },
-    { name: "Emma Davis", points: 1987, image: "/placeholder.svg" },
+    { name: "Sarthak Agarwal", points: 2280, image: "/placeholder.svg" },
+    { name: "Apurv Dugar", points: 2227, image: "/placeholder.svg" },
+    { name: "Mehul Agarwal", points: 2205, image: "/placeholder.svg" },
   ];
 
   return (

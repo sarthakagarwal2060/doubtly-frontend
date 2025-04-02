@@ -30,7 +30,7 @@ export default function Dashboard() {
           <div className="flex justify-between">
             <div className="w-[70%]">
               <TrendingDoubts />
-              <LatestDoubts />
+              {/* <LatestDoubts /> */}
             </div>
 
             <div className="w-[27.5%]">
