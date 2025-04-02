@@ -28,7 +28,7 @@ function Team() {
     {
       name: "Sarthak Agarwal",
       role: "Developer",
-      lnkdn: "",
+      lnkdn: "https://www.linkedin.com/in/sarthak-agarwal-243a50303/",
       github: "https://github.com/sarthakagarwal2060",
       image: Sarthak,
     },
@@ -37,7 +37,7 @@ function Team() {
       role: "Developer",
       lnkdn: "https://www.linkedin.com/in/narendra-sirvi-4b694a188/",
       github: "https://github.com/Naren456",
-      image: Default,
+      image: Narendra,
     },
   ];
 
@@ -67,11 +67,11 @@ function Team() {
                     </p>
                     <div className="flex justify-center gap-6 mt-8">
                       <div className="flex items-center justify-center gap-1">
-                        <Linkedin size="18"/>
+                        <Github size="18"/>
                         <button className="bg-[#]"><Link to={member.github} target="blank">GitHub</Link></button>
                       </div>
                       <div className="flex items-center justify-center gap-1">
-                        <Github size="18"/>
+                        <Linkedin size="18"/>
                         <button className="bg-[#]"><Link to={member.lnkdn} target="blank">Linkedin</Link></button>
                       </div>
                     </div>
