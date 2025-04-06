@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-function DoubtCard({ title, tags, username, answerCount, upvotes: initialUpvotes, timeAgo, className, onClick, id, isUpvoted = false }) {
+function DoubtCard({ title, tags, username, answerCount, upvotes: initialUpvotes, timeAgo, className, onClick, id, isUpvoted = false, status}) {
   const [upvotes, setUpvotes] = useState(initialUpvotes);
   const [isUpvoting, setIsUpvoting] = useState(false);
   const [hasUpvoted, setHasUpvoted] = useState(isUpvoted);
 
-  // Synchronize state when props change (e.g., when navigating between pages)
+
   useEffect(() => {
     setUpvotes(initialUpvotes);
     setHasUpvoted(isUpvoted);
@@ -41,22 +41,20 @@ function DoubtCard({ title, tags, username, answerCount, upvotes: initialUpvotes
     
     setIsUpvoting(true);
     
-    // Optimistically update UI
+
     const newUpvoteState = !hasUpvoted;
     setHasUpvoted(newUpvoteState);
     setUpvotes(prev => newUpvoteState ? prev + 1 : prev - 1);
     
     try {
       await handleUpvoteInBackend(id);
-      
-      // Show appropriate toast based on action
+  
       if (newUpvoteState) {
         toast.success("Upvoted successfully!");
       } else {
         toast.success("Upvote removed successfully");
       }
     } catch (error) {
-      // Revert changes on error
       setHasUpvoted(!newUpvoteState);
       setUpvotes(prev => !newUpvoteState ? prev + 1 : prev - 1);
       
@@ -71,14 +69,38 @@ function DoubtCard({ title, tags, username, answerCount, upvotes: initialUpvotes
     }
   };
 
+  const getStatusColor = () => {
+    if (status === "verified solution available") {
+      return "bg-green-500";
+    } else if (status === "unverified solution available") {
+      return "bg-yellow-500";
+    } else {
+      return "bg-red-500";
+    }
+  };
+
+  const getStatusLabel = () => {
+    if (status === "verified solution available") {
+      return "Solved";
+    } else if (status === "unverified solution available") {
+      return "Partially Solved";
+    } else {
+      return "Unsolved";
+    }
+  };
+
   return (
     <>
       <Card
-        className={`backdrop-blur-sm bg-white/30 border-borderColor shadow-sm hover:shadow-md transition-shadow cursor-pointer dark:bg-[#1C1C1E] ${
+        className={`backdrop-blur-sm bg-white/30 border-borderColor shadow-sm hover:shadow-md transition-shadow cursor-pointer dark:bg-[#1C1C1E] relative ${
           className || ""
         }`}
         onClick={onClick}
       >
+        <div className={`absolute top-2 right-2 rounded-full px-2 py-1 text-xs text-white font-medium ${getStatusColor()}`}>
+          {getStatusLabel()}
+        </div>
+
         <div className="space-y-2 p-3 pb-6">
           <div className="flex gap-2">
             {tags.map((tag) => (

@@ -93,7 +93,6 @@ function SolutionModal({ doubt, onClose }) {
               </Button>
             </Flex>
 
-            {/* Doubt details */}
             <Card className="mb-6 p-4 bg-gray-50">
               <Flex gap="2" direction="column">
                 <Text size="5" weight="bold">{doubt.title}</Text>
@@ -115,7 +114,6 @@ function SolutionModal({ doubt, onClose }) {
 
             <Separator size="4" mb="4" />
 
-            {/* Solutions list */}
             <Box className="mb-6">
               <Text size="4" weight="bold" mb="3">All Solutions</Text>
               
@@ -151,7 +149,7 @@ function SolutionModal({ doubt, onClose }) {
               )}
             </Box>
 
-            {/* Post new solution */}
+
             <Box>
               <Text size="4" weight="bold" mb="3">Post Your Solution</Text>
               <TextArea 

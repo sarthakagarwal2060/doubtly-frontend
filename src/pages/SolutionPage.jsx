@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Card, Text, Button, Box, Flex, Avatar, Separator, TextArea } from '@radix-ui/themes';
-import { ThumbsUp, MessageCircle, Clock, X } from 'lucide-react';
+import { Card, Text, Button, Box, Flex, Avatar, Separator, TextArea, Badge } from '@radix-ui/themes';
+import { ThumbsUp, MessageCircle, Clock, X, CheckCircle } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -18,6 +18,7 @@ function SolutionPage() {
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [upvoting, setUpvoting] = useState(null);
+  const [verifying, setVerifying] = useState(null);
 
   useEffect(() => {
     fetchDoubtDetails();
@@ -51,6 +52,7 @@ function SolutionPage() {
       }
       
       setDoubt(response.data.result);
+      console.log("Doubt data:", response.data.result);
       setError(null);
     } catch (error) {
       setError("Failed to load doubt details");
@@ -73,11 +75,14 @@ function SolutionPage() {
       );
       
       const solutionsData = response.data.result || [];
+      // console.log(solutionsData)
       const formattedSolutions = solutionsData.map(solution => ({
         ...solution,
         id: solution.id,
         upvotes: solution.upvotes,
-        isUpvoted: solution.isUpvoted
+        isUpvoted: solution.isUpvoted,
+        isVerified: solution.isVerified || 'pending',
+        isUserSol: solution.isUserSol
       }));
       
       setSolutions(formattedSolutions);
@@ -141,6 +146,69 @@ function SolutionPage() {
     }
   };
 
+
+  const isDoubtAuthor = doubt&&doubt.isUserDoubt;
+
+  const handleVerifySolution = async (solution) => {
+    if (verifying === solution.id) return;
+    
+    if (!isDoubtAuthor) {
+      toast.error("Only the doubt author can verify solutions");
+      return;
+    }
+    
+    setVerifying(solution.id);
+    
+    const newVerificationStatus = solution.isVerified === 'correct' ? 'pending' : 'correct';
+    
+    setSolutions(prev => 
+      prev.map(s => 
+        s.id === solution.id 
+          ? { ...s, isVerified: newVerificationStatus } 
+          : s
+      )
+    );
+    
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("Authentication required");
+      }
+      
+      await axios.put(
+        `https://doubtly-backend.onrender.com/api/solution/updateStatus/${solution.id}`,
+        { status: newVerificationStatus },
+        {
+          headers: { 
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}` 
+          },
+          withCredentials: true,
+        }
+      );
+      
+      toast.success(newVerificationStatus === 'correct'
+        ? "Solution verified successfully!" 
+        : "Solution verification removed");
+    } catch (error) {
+      setSolutions(prev => 
+        prev.map(s => 
+          s.id === solution.id 
+            ? { ...s, isVerified: solution.isVerified } 
+            : s
+        )
+      );
+      
+      if (error.message === "Authentication required") {
+        toast.error("Please log in to verify solutions");
+      } else {
+        toast.error("Failed to update verification status");
+      }
+    } finally {
+      setVerifying(null);
+    }
+  };
+
   const handleSubmitSolution = async () => {
     const solutionText = solutionRef.current?.value?.trim();
     if (!solutionText) {
@@ -154,7 +222,10 @@ function SolutionPage() {
       const token = localStorage.getItem("token");
       const response = await axios.post(
         `https://doubtly-backend.onrender.com/api/solution/add/${doubtId}`,
-        { solution: solutionText },
+        { 
+          solution: solutionText,
+          isVerified: false 
+        },
         {
           headers: {
             "Content-Type": "application/json",
@@ -271,7 +342,19 @@ function SolutionPage() {
             ) : (
               <div className="space-y-4">
                 {solutions.map((solution) => (
-                  <Card key={solution.id} className="bg-white/50 hover:bg-white/80 transition-colors p-6 dark:bg-[#1C1C1E]">
+                  <Card key={solution.id} className="bg-white/50 hover:bg-white/80 transition-colors p-6 dark:bg-[#1C1C1E] relative">
+                    <div className="absolute top-2 right-2">
+                      {solution.isVerified === 'correct' ? (
+                        <Badge color="green" className="flex items-center gap-1">
+                          <CheckCircle size={12} />
+                          Verified
+                        </Badge>
+                      ) : (
+                        <Badge color="gray" className="flex items-center gap-1">
+                          Not Verified
+                        </Badge>
+                      )}
+                    </div>
                     <Flex direction="column" gap="4">
                       <Text className="text-gray-700 dark:text-gray-300">{solution.solution}</Text>
                       <Flex align="center" justify="between">
@@ -287,19 +370,40 @@ function SolutionPage() {
                             <Text size="1" color="gray" className="dark:text-gray-400">{solution.timeAgo}</Text>
                           </div>
                         </Flex>
-                        <span
-                          className={`flex items-center gap-1 hover:text-blue-500 cursor-pointer transition-colors ${
-                            upvoting === solution.id ? "opacity-50" : ""
-                          } ${solution.isUpvoted ? "text-blue-500" : ""}`}
-                          onClick={() => handleSolutionUpvote(solution)}
-                          title={solution.isUpvoted ? "Remove upvote" : "Upvote this solution"}
-                        >
-                          <ThumbsUp 
-                            className={`h-4 w-4 ${upvoting === solution.id ? "animate-pulse" : ""}`}
-                            fill={solution.isUpvoted ? "currentColor" : "none"}
-                          />
-                          <Text size="2">{solution.upvotes}</Text>
-                        </span>
+                        <Flex align="center" gap="3">
+                          <span
+                            className={`flex items-center gap-1 hover:text-blue-500 cursor-pointer transition-colors ${
+                              upvoting === solution.id ? "opacity-50" : ""
+                            } ${solution.isUpvoted ? "text-blue-500" : ""}`}
+                            onClick={() => handleSolutionUpvote(solution)}
+                            title={solution.isUpvoted ? "Remove upvote" : "Upvote this solution"}
+                          >
+                            <ThumbsUp 
+                              className={`h-4 w-4 ${upvoting === solution.id ? "animate-pulse" : ""}`}
+                              fill={solution.isUpvoted ? "currentColor" : "none"}
+                            />
+                            <Text size="2">{solution.upvotes}</Text>
+                          </span>
+                          
+                          {isDoubtAuthor && (
+                            <Button 
+                              color={solution.isVerified === 'correct' ? "red" : "green"} 
+                              variant="soft" 
+                              size="1"
+                              onClick={() => handleVerifySolution(solution)}
+                              disabled={verifying === solution.id}
+                              className="ml-2 cursor-pointer hover:opacity-90 transition-opacity"
+                            >
+                              <CheckCircle size={14} />
+                              {verifying === solution.id 
+                                ? "Processing..." 
+                                : solution.isVerified === 'correct' 
+                                  ? "Remove Verification" 
+                                  : "Verify Solution"
+                              }
+                            </Button>
+                          )}
+                        </Flex>
                       </Flex>
                     </Flex>
                   </Card>
@@ -318,8 +422,20 @@ function SolutionPage() {
                 className="min-h-[300px] min-w-full mb-4 resize-none p-2 start-0 bg-white/50 border-[1px] border-gray-300 dark:bg-[#1C1C1E] dark:text-white dark:placeholder:text-gray-400"
               />
               <Flex gap="3" justify="end">
-                <Button variant="soft" onClick={() => navigate(-1)} disabled={submitting} className="dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white">Cancel</Button>
-                <Button color="blue" onClick={handleSubmitSolution} disabled={submitting}>
+                <Button 
+                  variant="soft" 
+                  onClick={() => navigate(-1)} 
+                  disabled={submitting} 
+                  className="dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white"
+                >
+                  Cancel
+                </Button>
+                
+                <Button 
+                  color="blue" 
+                  onClick={handleSubmitSolution} 
+                  disabled={submitting}
+                >
                   {submitting ? (
                     <Flex align="center" gap="2">
                       <span className="animate-spin">⏳</span> 

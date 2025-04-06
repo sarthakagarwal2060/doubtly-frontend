@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Sun, Moon } from 'lucide-react';
+// import { ToastContainer } from 'react-toastify';
 
 function DarkModeToggle() {
 	const [currentTheme, setTheme] = useState(getInitialTheme());
@@ -39,14 +40,26 @@ function DarkModeToggle() {
 	}
 
 	return (
-		<>
-			{currentTheme === 'dark' ? (
-				<Sun className="h-10 w-" onClick={toggleTheme} />
-			) : (
-				<Moon className="h-12 w-5" onClick={toggleTheme} />
-			)}
-		</>
-	);
+    <>
+      {currentTheme === "dark" ? (
+        <Sun className="h-10 w-" onClick={toggleTheme} />
+      ) : (
+        <Moon className="h-12 w-5" onClick={toggleTheme} />
+      )}
+      {/* <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+        theme={currentTheme}
+      /> */}
+    </>
+  );
 }
 
 export default DarkModeToggle;
