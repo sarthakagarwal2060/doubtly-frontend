@@ -1,17 +1,10 @@
 import "@radix-ui/themes/styles.css";
 import { Card, Box, Text, Flex, Table, Badge } from "@radix-ui/themes";
+import useLeaderboard from '../../hooks/useLeaderboard';
 
 export default function CompleteLeaderBoard() {
-    // Mock data - replace with actual data from your API
-    const allUsers = [
-        { id: 1, name: "Sarthak Agarwal", points: 1250, solutions: 78, doubts: 42, rank: 1, avatar: "" },
-        { id: 2, name: "Apurv Dugar", points: 980, solutions: 54, doubts: 31, rank: 2, avatar: "" },
-        { id: 3, name: "Narendra Sirvi", points: 875, solutions: 49, doubts: 25, rank: 3, avatar: "" },
-        { id: 4, name: "Mehul Agarwal", points: 720, solutions: 38, doubts: 19, rank: 4, avatar: "" },
-        { id: 5, name: "Ojas Maheswari", points: 650, solutions: 32, doubts: 15, rank: 5, avatar: "" },
-    ];
+    const { leaderboardData, loading, error } = useLeaderboard();
 
-    // Function to render rank icon
     const getRankIcon = (rank) => {
         if (rank === 1) return <span className="text-yellow-400">🏆</span>;
         if (rank === 2) return <span className="text-gray-400">🥈</span>;
@@ -19,11 +12,29 @@ export default function CompleteLeaderBoard() {
         return rank;
     };
 
+    if (loading) {
+        return (
+            <div className="max-w-[1200px] mx-auto p-5">
+                <div className="p-5 rounded-xl border border-indigo-100 bg-gray-100 shadow-sm dark:bg-gray-800 dark:text-white dark:border-gray-500 text-center">
+                    Loading leaderboard data...
+                </div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="max-w-[1200px] mx-auto p-5">
+                <div className="p-5 rounded-xl border border-indigo-100 bg-gray-100 shadow-sm dark:bg-gray-800 dark:text-white dark:border-gray-500 text-center text-red-500">
+                    Error loading leaderboard: {error}
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="max-w-[1200px] mx-auto p-5  ">
             <div className="p-5 rounded-xl border border-indigo-100 bg-gray-100 shadow-sm dark:bg-gray-800 dark:text-black dark:border-gray-500">
-
-
                 <Table.Root>
                     <Table.Header>
                         <Table.Row>
@@ -36,7 +47,7 @@ export default function CompleteLeaderBoard() {
                     </Table.Header>
 
                     <Table.Body>
-                        {allUsers.map((user) => (
+                        {leaderboardData.map((user) => (
                             <Table.Row key={user.id}>
                                 <Table.Cell>
                                     <Flex align="center">
