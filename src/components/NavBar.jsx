@@ -6,13 +6,20 @@ import DarkModeToggle from "./DarkMode/DarkModeToggle";
 import fetchUserDetails from "../hooks/fetchUserDetails";
 import SearchPage from "../pages/SearchPage";
 function NavBar({doubtly, searchBar, notification, profile}) {
-  const navigate = useNavigate();
+  const navigate = useNavigate();  
+  const [query, setQuery] = useState('');
   const [logout, setLogout] = useState(false);
   const Logout = ()=> {
     setLogout(true) ;
     localStorage.removeItem("token");
     navigate("/");
   } ;
+
+  const handleSearchNavigate = () => {
+    if (query.trim()) {
+      navigate(`/Search/SearchPage?q=${encodeURIComponent(query)}`);
+    }
+  };
   const { userDetails, loading } = fetchUserDetails(); 
   return (
     <>
@@ -23,7 +30,13 @@ function NavBar({doubtly, searchBar, notification, profile}) {
             <div className="w-full flex items-center space-x-2 ">
               <div className="relative w-full ">
                 <Search className="absolute left-3 top-2.5 h-4 w-4  "/>
-                <input onClick={()=>{navigate("/Search/SearchPage")}}
+                <input 
+                     type="text"
+                     value={query}
+                     onChange={(e) => setQuery(e.target.value)}
+                     onKeyDown={(e) => {
+                       if (e.key === "Enter") handleSearchNavigate();
+                     }}
                   placeholder="Search doubts..."
                   className="w-full pl-9 h-9 rounded-md bg-gray-100 px-3 py-1 text-base shadow-sm focus-visible:outline-zinc-800 focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50  dark:bg-gray-800"
                 />
