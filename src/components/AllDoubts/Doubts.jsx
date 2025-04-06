@@ -31,6 +31,7 @@ function Doubts() {
         }
       );
       setAllDoubts(response.data.result);
+    
       setLoading(false);
     };
     fetchAllDoubts();
@@ -39,12 +40,14 @@ function Doubts() {
   if (loading) {
     return <div><Loader /></div>;
   }
+
   console.log(allDoubts);
   allDoubts.forEach
   ((doubt) => {
     console.log(doubt.date); // Log the tags array for each doubt
   } 
   )
+
   
   return (
     <>
