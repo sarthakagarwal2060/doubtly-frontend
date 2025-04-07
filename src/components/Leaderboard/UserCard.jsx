@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Text, Button, Box, Flex, Avatar, Separator, TextArea } from '@radix-ui/themes';
+
 const UserCard = ({ user, className }) => {
     const getRankIcon = (rank) => {
         if (rank === 1) return <span className="text-yellow-400">🏆</span>;
@@ -27,16 +28,10 @@ const UserCard = ({ user, className }) => {
         <Text size="3">{user.points} points</Text>
     </Flex>
 
-    <Flex gap="4">
-        <div className="text-center">
-            <Text size="5" weight="bold">{user.solutions}</Text>
-            <Text size="2" className="text-gray-600 dark:text-white"> Solutions</Text>
-        </div>
-        <div className="text-center">
-            <Text size="5" weight="bold">{user.doubts}</Text>
-            <Text size="2" className="text-gray-600 dark:text-white"> Doubts</Text>
-        </div>
-    </Flex>
+    <div className="text-center w-full">
+        <Text size="5" weight="bold">{user.correctlyAnswered}</Text>
+        <Text size="2" className="text-gray-600 dark:text-white">Correctly Answered</Text>
+    </div>
 </div>
   )
 }

@@ -75,7 +75,6 @@ function SolutionPage() {
       );
       
       const solutionsData = response.data.result || [];
-      // console.log(solutionsData)
       const formattedSolutions = solutionsData.map(solution => ({
         ...solution,
         id: solution.id,
@@ -183,7 +182,7 @@ function SolutionPage() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}` 
           },
-          withCredentials: true,
+          withCredentials: true
         }
       );
       
