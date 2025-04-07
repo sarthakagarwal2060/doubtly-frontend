@@ -12,7 +12,7 @@ function useLeaderboard() {
     
     try {
       const response = await axios.get(
-        "https://doubtly-backend.onrender.com/api/leaderboard",
+        "https://doubtly-backend.onrender.com/api/userDetails/leaderboard",
         {
           headers: {
             "Content-Type": "application/json",
@@ -22,7 +22,9 @@ function useLeaderboard() {
         }
       );
       
-      setLeaderboardData(response.data);
+      setLeaderboardData(response.data.result);
+      console.log(response.data.result);
+      
       setLoading(false);
     } catch (err) {
       setError(err.message || "Failed to fetch leaderboard data");

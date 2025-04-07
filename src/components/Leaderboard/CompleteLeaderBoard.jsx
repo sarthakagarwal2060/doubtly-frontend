@@ -1,6 +1,7 @@
 import "@radix-ui/themes/styles.css";
 import { Card, Box, Text, Flex, Table, Badge } from "@radix-ui/themes";
 import useLeaderboard from '../../hooks/useLeaderboard';
+import Loader from "../Loader";
 
 export default function CompleteLeaderBoard() {
     const { leaderboardData, loading, error } = useLeaderboard();
@@ -16,7 +17,7 @@ export default function CompleteLeaderBoard() {
         return (
             <div className="max-w-[1200px] mx-auto p-5">
                 <div className="p-5 rounded-xl border border-indigo-100 bg-gray-100 shadow-sm dark:bg-gray-800 dark:text-white dark:border-gray-500 text-center">
-                    Loading leaderboard data...
+                   <Loader/>
                 </div>
             </div>
         );
@@ -38,20 +39,19 @@ export default function CompleteLeaderBoard() {
                 <Table.Root>
                     <Table.Header>
                         <Table.Row>
-                            <Table.ColumnHeaderCell>Rank</Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell>User</Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell>Doubts</Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell>Solutions</Table.ColumnHeaderCell>
-                            <Table.ColumnHeaderCell>Points</Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="text-center w-[10%]">Rank</Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="w-[40%]">User</Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="text-center w-[25%]">Correctly Answered</Table.ColumnHeaderCell>
+                            <Table.ColumnHeaderCell className="text-center w-[25%]">Points</Table.ColumnHeaderCell>
                         </Table.Row>
                     </Table.Header>
 
                     <Table.Body>
-                        {leaderboardData.map((user) => (
-                            <Table.Row key={user.id}>
-                                <Table.Cell>
-                                    <Flex align="center">
-                                        {getRankIcon(user.rank)}
+                        {leaderboardData.map((user, index) => (
+                            <Table.Row key={user.id || index}>
+                                <Table.Cell className="text-center">
+                                    <Flex align="center" justify="center">
+                                        {getRankIcon(index + 1)}
                                     </Flex>
                                 </Table.Cell>
                                 <Table.Cell>
@@ -64,12 +64,15 @@ export default function CompleteLeaderBoard() {
                                         <Text>{user.name}</Text>
                                     </Flex>
                                 </Table.Cell>
-                                <Table.Cell>{user.doubts}</Table.Cell>
-                                <Table.Cell>{user.solutions}</Table.Cell>
-                                <Table.Cell>
-                                    <Badge size="1" className="bg-purple-100 text-purple-600 rounded-xl px-2.5 py-0.5">
-                                        {user.points}
-                                    </Badge>
+                                <Table.Cell className="text-center">
+                                    {user.correctlyAnswered}
+                                </Table.Cell>
+                                <Table.Cell className="text-center">
+                                    <Flex justify="center">
+                                        <Badge size="1" className="bg-purple-100 text-purple-600 rounded-xl px-2.5 py-0.5">
+                                            {user.points}
+                                        </Badge>
+                                    </Flex>
                                 </Table.Cell>
                             </Table.Row>
                         ))}
