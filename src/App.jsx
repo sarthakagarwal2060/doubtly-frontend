@@ -18,16 +18,14 @@ import AllDoubts from "./pages/AllDoubts";
 import PostButton from "./components/PostButton"
 import PublicRoute from "./components/PublicRoute";
 import Team from "./components/Landing/Team";
-
+import Points from "./pages/Points&Rewards";
 import SearchPage from "./pages/SearchPage";
-
-
+import { useEffect, useState ,useRef } from "react";
+import { useDarkMode } from "./components/DarkMode/DarkModeProvider";
 
 
 function App() {
-
-  
-
+  const { currentTheme} = useDarkMode();  
   return (
     <>
       <Routes>
@@ -42,7 +40,8 @@ function App() {
         <Route path="/dashboard/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
         <Route path="/dashboard/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/dashboard/doubt/:doubtId" element={<ProtectedRoute><SolutionPage /></ProtectedRoute>} />
-        <Route path="/Search/SearchPage" element={<ProtectedRoute><SearchPage/></ProtectedRoute>} />
+        <Route path="/dashboard/Search" element={<ProtectedRoute><SearchPage/></ProtectedRoute>} />
+        <Route path="/dashboard/points" element={<ProtectedRoute><Points/></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer 
@@ -55,7 +54,9 @@ function App() {
         pauseOnFocusLoss={false}
         draggable={false}
         pauseOnHover={false}
-        theme="light"
+    
+        key={currentTheme} 
+        theme={currentTheme}
       />
 
     </>
