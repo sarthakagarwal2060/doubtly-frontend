@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Card, Text, Button, Box, Flex, Avatar, Separator, TextArea } from '@radix-ui/themes';
-import { ThumbsUp, MessageCircle, Clock, X } from 'lucide-react';
+import { Card, Text, Button, Box, Flex, Avatar, Separator, TextArea, Dialog } from '@radix-ui/themes';
+import { ThumbsUp, MessageCircle, Clock, X, Edit2, Trash2 } from 'lucide-react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import Dashboard from '../../pages/Dashboard';
@@ -10,6 +10,11 @@ function SolutionModal({ doubt, onClose }) {
   const [solutions, setSolutions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [editing, setEditing] = useState(null);
+  const [deleting, setDeleting] = useState(null);
+  const [editText, setEditText] = useState('');
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [solutionToDelete, setSolutionToDelete] = useState(null);
   const solutionRef = useRef(null);
 
   useEffect(() => {
@@ -74,6 +79,92 @@ function SolutionModal({ doubt, onClose }) {
     }
   };
 
+  const handleEditSolution = (solution) => {
+    setEditing(solution.id);
+    setEditText(solution.description);
+  };
+
+  const handleCancelEdit = () => {
+    setEditing(null);
+    setEditText('');
+  };
+
+  const handleUpdateSolution = async (solutionId) => {
+    if (!editText.trim()) {
+      toast.error("Solution cannot be empty");
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.put(
+        `https://doubtly-backend.onrender.com/api/solution/update/${solutionId}`,
+        { 
+          description: editText
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Solution updated successfully!");
+        setEditing(null);
+        setEditText('');
+        fetchSolutions();
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 403) {
+        toast.error("You don't have permission to edit this solution");
+      } else {
+        toast.error("Failed to update solution");
+      }
+    }
+  };
+
+  const handleDeleteClick = (solution) => {
+    setSolutionToDelete(solution);
+    setShowDeleteConfirm(true);
+  };
+
+  const handleDeleteSolution = async () => {
+    if (!solutionToDelete) return;
+    
+    setDeleting(solutionToDelete.id);
+    
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.delete(
+        `https://doubtly-backend.onrender.com/api/solution/delete/${solutionToDelete.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (response.status === 200) {
+        toast.success("Solution deleted successfully!");
+        setSolutions(prev => prev.filter(s => s.id !== solutionToDelete.id));
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 403) {
+        toast.error("You don't have permission to delete this solution");
+      } else {
+        toast.error("Failed to delete solution");
+      }
+    } finally {
+      setDeleting(null);
+      setShowDeleteConfirm(false);
+      setSolutionToDelete(null);
+    }
+  };
+
   return (
     <>
       <div className="fixed inset-0 filter blur-sm">
@@ -135,12 +226,65 @@ function SolutionModal({ doubt, onClose }) {
                           <Text size="2" weight="bold">{solution.user?.name || 'Anonymous'}</Text>
                           <Text size="1" color="gray">{solution.createdAt ? new Date(solution.createdAt).toLocaleDateString() : 'Recently'}</Text>
                         </Flex>
-                        <Text size="2">{solution.description}</Text>
+                        
+                        {editing === solution.id ? (
+                          <div className="space-y-3">
+                            <TextArea 
+                              value={editText}
+                              onChange={(e) => setEditText(e.target.value)}
+                              className="min-h-[100px] w-full resize-none"
+                              placeholder="Edit your solution..."
+                            />
+                            <Flex gap="2" justify="end">
+                              <Button 
+                                variant="soft" 
+                                onClick={handleCancelEdit}
+                                disabled={submitting}
+                              >
+                                Cancel
+                              </Button>
+                              <Button 
+                                color="blue" 
+                                onClick={() => handleUpdateSolution(solution.id)}
+                                disabled={submitting}
+                              >
+                                {submitting ? "Updating..." : "Update"}
+                              </Button>
+                            </Flex>
+                          </div>
+                        ) : (
+                          <Text size="2">{solution.description}</Text>
+                        )}
+                        
                         <Flex align="center" gap="2">
                           <Button variant="ghost" size="1">
                             <ThumbsUp size={14} />
                             <Text size="1">{solution.upvotes || 0}</Text>
                           </Button>
+                          
+                          {/* Only show edit/delete buttons if the solution belongs to the current user */}
+                          {solution.isUserSol && (
+                            <>
+                              <Button 
+                                variant="ghost" 
+                                size="1"
+                                onClick={() => handleEditSolution(solution)}
+                                className="text-gray-500 hover:text-blue-500"
+                                title="Edit solution"
+                              >
+                                <Edit2 size={14} />
+                              </Button>
+                              <Button 
+                                variant="ghost" 
+                                size="1"
+                                onClick={() => handleDeleteClick(solution)}
+                                className="text-gray-500 hover:text-red-500"
+                                title="Delete solution"
+                              >
+                                <Trash2 size={14} />
+                              </Button>
+                            </>
+                          )}
                         </Flex>
                       </Flex>
                     </Card>
@@ -177,6 +321,31 @@ function SolutionModal({ doubt, onClose }) {
           </Card>
         </div>
       </div>
+      
+      {/* Delete Confirmation Dialog */}
+      <Dialog.Root open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm}>
+        <Dialog.Content size="2">
+          <Dialog.Title>Delete Solution</Dialog.Title>
+          <Dialog.Description size="2" mb="4">
+            Are you sure you want to delete this solution? This action cannot be undone.
+          </Dialog.Description>
+
+          <Flex gap="3" mt="4" justify="end">
+            <Dialog.Close>
+              <Button variant="soft" color="gray">
+                Cancel
+              </Button>
+            </Dialog.Close>
+            <Button 
+              color="red" 
+              onClick={handleDeleteSolution}
+              disabled={deleting}
+            >
+              {deleting ? "Deleting..." : "Delete"}
+            </Button>
+          </Flex>
+        </Dialog.Content>
+      </Dialog.Root>
     </>
   );
 }

@@ -2,8 +2,6 @@ import MainComponent from "../components/postdoubt/maincomponent";
 import axios from "axios";
 import { useRef } from "react";
 import Dashboard from "./Dashboard";
-
-// Separate the handleSubmit function from the component
 export const handleSubmit = async (titleRef, descriptionRef, categoryRef) => {
   try {
     const token = localStorage.getItem("token");

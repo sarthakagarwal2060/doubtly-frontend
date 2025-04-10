@@ -15,7 +15,6 @@ export default function MainComponent({
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   const handleClick = async () => {
-    // Validate inputs
     if (!titleRef.current?.value?.trim()) {
       toast.error("Please enter a doubt title");
       return;
