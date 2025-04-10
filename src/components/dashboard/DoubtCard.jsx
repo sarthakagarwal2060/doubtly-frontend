@@ -104,7 +104,7 @@ function DoubtCard({ title, tags, username, answerCount, upvotes: initialUpvotes
             {tags.map((tag) => (
               <Badge
                 size={"1"}
-                color={tag === "frontend" ? "crimson" : tag === "backend" ? "yellow" : tag === "ai/ml" ? "green" : tag === "maths" ? "bronze" : tag === "dsa" ? "purple" : ""}
+                color={tag === "frontend" ? "crimson" : tag === "backend" ? "iris" : tag === "ai/ml" ? "green" : tag === "maths" ? "bronze" : tag === "dsa" ? "purple" : ""}
                 key={tag}
                 radius="full"
                 className={`text-xs p-24 ${

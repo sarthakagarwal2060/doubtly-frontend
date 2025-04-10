@@ -49,10 +49,11 @@ const NavBar = (({doubtly, searchBar, notification, profile}) =>{
         
         notification && profile &&
           <div className="flex items-center gap-6">
+            <button className="h-full cursor-pointer">
               <DarkModeToggle />
+            </button>
             <button className="h-full">
-          
-              <Bell className="h-4 w-4" />
+              <Bell className="h-5 w-5" />
             </button>
 
             <DropdownMenu.Root>
