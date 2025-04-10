@@ -21,7 +21,7 @@ export default function TrendingDoubts() {
     const token = localStorage.getItem("token");
     const fetchTrendingDoubts = async () => {
       const response = await axios.get(
-        "https://doubtly-backend.onrender.com/api/doubt/showAll",
+        "https://doubtly-backend.onrender.com/api/doubt/trending",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ export default function TrendingDoubts() {
           </Button>
         </div>
         <div className="grid gap-4">
-          {trendingDoubts.map((doubt) => (
+          {trendingDoubts.slice(0,5).map((doubt) => (
           //  console.log(doubt)
             <DoubtCard 
               key={doubt.id || doubt.title}
