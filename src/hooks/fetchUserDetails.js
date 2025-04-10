@@ -25,6 +25,7 @@ function fetchUserDetails() {
       localStorage.setItem("email", fetchedDetails.email);
       localStorage.setItem("fullName", fetchedDetails.fullName);
       localStorage.setItem("joinedDate", fetchedDetails.joinedDate);
+  
       setLoading(false);
     };
     fetchDetails();

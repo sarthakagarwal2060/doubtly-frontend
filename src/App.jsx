@@ -18,11 +18,16 @@ import AllDoubts from "./pages/AllDoubts";
 import PostButton from "./components/PostButton";
 import PublicRoute from "./components/PublicRoute";
 import Team from "./components/Landing/Team";
-
+import Points from "./pages/Points&Rewards";
 import SearchPage from "./pages/SearchPage";
+import { useEffect, useState ,useRef } from "react";
+import { useDarkMode } from "./components/DarkMode/DarkModeProvider";
+
 
 function App() {
+     const { currentTheme} = useDarkMode();  
   return (
+ 
     <>
       <Routes>
         <Route
@@ -121,6 +126,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer
@@ -133,7 +139,9 @@ function App() {
         pauseOnFocusLoss={false}
         draggable={false}
         pauseOnHover={false}
-        theme="light"
+    
+        key={currentTheme} 
+        theme={currentTheme}
       />
     </>
   );

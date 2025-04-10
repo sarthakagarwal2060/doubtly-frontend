@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState ,memo } from "react";
 import { Search, Bell, Menu, ChevronLeft } from "lucide-react";
 import { DropdownMenu, Button, Avatar } from "@radix-ui/themes";
 import { useNavigate } from "react-router-dom";
 import DarkModeToggle from "./DarkMode/DarkModeToggle";
 import fetchUserDetails from "../hooks/fetchUserDetails";
-import SearchPage from "../pages/SearchPage";
-function NavBar({doubtly, searchBar, notification, profile}) {
+
+const NavBar = (({doubtly, searchBar, notification, profile}) =>{
   const navigate = useNavigate();  
   const [query, setQuery] = useState('');
   const [logout, setLogout] = useState(false);
@@ -17,7 +17,7 @@ function NavBar({doubtly, searchBar, notification, profile}) {
 
   const handleSearchNavigate = () => {
     if (query.trim()) {
-      navigate(`/Search/SearchPage?q=${encodeURIComponent(query)}`);
+      navigate(`/dashboard/Search?q=${encodeURIComponent(query)}`);
     }
   };
   const { userDetails, loading } = fetchUserDetails(); 
@@ -98,6 +98,6 @@ function NavBar({doubtly, searchBar, notification, profile}) {
       </nav>
     </>
   );
-}
+})
 
 export default NavBar;
