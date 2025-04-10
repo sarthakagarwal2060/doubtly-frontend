@@ -71,11 +71,11 @@ function DoubtCard({ title, tags, username, answerCount, upvotes: initialUpvotes
 
   const getStatusColor = () => {
     if (status === "verified solution available") {
-      return "bg-green-500";
+      return "bg-green-700";
     } else if (status === "unverified solution available") {
-      return "bg-yellow-500";
+      return "bg-yellow-600";
     } else {
-      return "bg-red-500";
+      return "bg-red-800";
     }
   };
 
@@ -97,23 +97,27 @@ function DoubtCard({ title, tags, username, answerCount, upvotes: initialUpvotes
         }`}
         onClick={onClick}
       >
-        <div className={`absolute top-2 right-2 rounded-full px-2 py-1 text-xs text-white font-medium ${getStatusColor()}`}>
-          {getStatusLabel()}
-        </div>
+        
 
         <div className="space-y-2 p-3 pb-6">
-          <div className="flex gap-2">
+          <div className="flex gap-2 justify-between">
             {tags.map((tag) => (
               <Badge
+                size={"1"}
+                color={tag === "frontend" ? "crimson" : tag === "backend" ? "yellow" : tag === "ai/ml" ? "green" : tag === "maths" ? "bronze" : tag === "dsa" ? "purple" : ""}
                 key={tag}
                 radius="full"
                 className={`text-xs p-24 ${
                   tag === "ai/ml" ? "uppercase" : "capitalize"
                 }`}
+                style={{ fontSize: "0.75rem", lineHeight: "1rem" }}
               >
                 {tag}
               </Badge>
             ))}
+            <div className={`rounded-full px-2 py-1 text-xs text-white font-medium ${getStatusColor()}`}>
+              {getStatusLabel()}
+            </div>
           </div>
           <h3 className="font-semibold leading-none pt-2">{title}</h3>
         </div>

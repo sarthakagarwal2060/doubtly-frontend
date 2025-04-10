@@ -15,7 +15,9 @@ function LeaderBoard() {
         </div>
 
         {loading ? (
-          <div className="p-3 pt-0 text-center">
+
+          <div className="p-3 pt-32 text-center">
+
             <Loader />
           </div>
         ) : error ? (

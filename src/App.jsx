@@ -12,10 +12,10 @@ import Profile from "./pages/Profile";
 import SolutionPage from "./pages/SolutionPage";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import AllDoubts from "./pages/AllDoubts";
-import PostButton from "./components/PostButton"
+import PostButton from "./components/PostButton";
 import PublicRoute from "./components/PublicRoute";
 import Team from "./components/Landing/Team";
 import Points from "./pages/Points&Rewards";
@@ -25,26 +25,111 @@ import { useDarkMode } from "./components/DarkMode/DarkModeProvider";
 
 
 function App() {
-  const { currentTheme} = useDarkMode();  
+     const { currentTheme} = useDarkMode();  
   return (
+ 
     <>
       <Routes>
-        <Route path="/" element={<PublicRoute><Landing /></PublicRoute>} />
-        <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
-        <Route path="/signup" element={<PublicRoute><Signup /></PublicRoute>} />
-        <Route path="/team" element={<PublicRoute><Team /></PublicRoute>} />
-        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-        <Route path="/dashboard/postdoubt" element={<ProtectedRoute><PostDoubt /></ProtectedRoute>} />
-        <Route path="/dashboard/alldoubts" element={<ProtectedRoute><AllDoubts /></ProtectedRoute>} />
-        <Route path="/dashboard/mydoubts" element={<ProtectedRoute><MyDoubts /></ProtectedRoute>} />
-        <Route path="/dashboard/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
-        <Route path="/dashboard/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="/dashboard/doubt/:doubtId" element={<ProtectedRoute><SolutionPage /></ProtectedRoute>} />
-        <Route path="/dashboard/Search" element={<ProtectedRoute><SearchPage/></ProtectedRoute>} />
-        <Route path="/dashboard/points" element={<ProtectedRoute><Points/></ProtectedRoute>} />
+        <Route
+          path="/"
+          element={
+            <PublicRoute>
+              <Landing />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute>
+              <Signup />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/team"
+          element={
+            <PublicRoute>
+              <Team />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/postdoubt"
+          element={
+            <ProtectedRoute>
+              <PostDoubt />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/alldoubts"
+          element={
+            <ProtectedRoute>
+              <AllDoubts />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/mydoubts"
+          element={
+            <ProtectedRoute>
+              <MyDoubts />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/leaderboard"
+          element={
+            <ProtectedRoute>
+              <Leaderboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/doubt/:doubtId"
+          element={
+            <ProtectedRoute>
+              <SolutionPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/Search/SearchPage"
+          element={
+            <ProtectedRoute>
+              <SearchPage />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <ToastContainer 
+      <ToastContainer
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
@@ -58,7 +143,6 @@ function App() {
         key={currentTheme} 
         theme={currentTheme}
       />
-
     </>
   );
 }

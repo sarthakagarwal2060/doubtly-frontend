@@ -20,7 +20,7 @@ const Category = forwardRef((props, ref) => {
         <Select.Trigger className="w-2/3" />
         <Select.Content>
           <Select.Group>
-            <Select.Label>Select Category</Select.Label>
+            {/* <Select.Label>Select Category</Select.Label> */}
             <Select.Item value="0" disabled>Select Category</Select.Item>
             <Select.Item value="Maths">Maths</Select.Item>
             <Select.Item value="DSA">DSA</Select.Item>
