@@ -1,11 +1,7 @@
 import "@radix-ui/themes/styles.css";
 import { Card, Box, Text, Flex, Table, Badge } from "@radix-ui/themes";
-import useLeaderboard from '../../hooks/useLeaderboard';
-import Loader from "../Loader";
 
-export default function CompleteLeaderBoard() {
-    const { leaderboardData, loading, error } = useLeaderboard();
-
+export default function CompleteLeaderBoard({ leaderboardData }) {
     const getRankIcon = (rank) => {
         if (rank === 1) return <span className="text-yellow-400">🏆</span>;
         if (rank === 2) return <span className="text-gray-400">🥈</span>;
@@ -13,29 +9,9 @@ export default function CompleteLeaderBoard() {
         return rank;
     };
 
-    if (loading) {
-        return (
-            <div className="max-w-[1200px] mx-auto p-5">
-                <div className="p-5 rounded-xl border border-indigo-100 bg-gray-100 shadow-sm dark:bg-gray-800 dark:text-white dark:border-gray-500 text-center">
-                   <Loader/>
-                </div>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="max-w-[1200px] mx-auto p-5">
-                <div className="p-5 rounded-xl border border-indigo-100 bg-gray-100 shadow-sm dark:bg-gray-800 dark:text-white dark:border-gray-500 text-center text-red-500">
-                    Error loading leaderboard: {error}
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div className="max-w-[1200px] mx-auto p-5  ">
-            <div className="p-5 rounded-xl border border-indigo-100 bg-gray-100 shadow-sm dark:bg-gray-800 dark:text-black dark:border-gray-500">
+        <div className="max-w-[1200px] mx-auto p-5">
+            <div className="p-5 rounded-xl border border-indigo-100 bg-gray-100 shadow-sm dark:bg-[#222427] dark:text-black dark:border-gray-500">
                 <Table.Root>
                     <Table.Header>
                         <Table.Row>

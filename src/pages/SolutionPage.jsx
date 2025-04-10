@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import NavBar from '../components/NavBar';
 import SideBar from '../components/SideBar';
+import Loader from '../components/Loader';
 
 function SolutionPage() {
   const { doubtId } = useParams();
@@ -347,6 +348,18 @@ function SolutionPage() {
     timeAgo: "Unknown",
   };
 
+  if (loading) {
+    return (
+      <>
+        <NavBar doubtly={false} searchBar={true} notification={true} profile={true}/>
+        <SideBar />
+        <main className="pt-16 md:pl-72 px-4 md:pr-8 min-h-screen bg-primary flex flex-col dark:bg-[#121212]">
+          <Loader />
+        </main>
+      </>
+    );
+  }
+
   if (!loading && !doubt && !error) {
     return (
       <>
@@ -382,7 +395,7 @@ function SolutionPage() {
 
   return (
     <>
-      <NavBar doubtly={false} searchBar={false} notification={true} profile={true}/>
+      <NavBar doubtly={false} searchBar={true} notification={true} profile={true}/>
       <SideBar />
       <main className="pt-16 pl-72 pr-8 min-h-screen bg-primary flex flex-col dark:bg-[#121212]">
         <div className="container w-[70%] py-6 space-y-8 flex-grow">
