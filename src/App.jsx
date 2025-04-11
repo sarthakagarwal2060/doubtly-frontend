@@ -119,7 +119,7 @@ function App() {
           }
         />
         <Route
-          path="/Search/SearchPage"
+          path="/dashboard/Search"
           element={
             <ProtectedRoute>
               <SearchPage />
