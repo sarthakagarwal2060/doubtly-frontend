@@ -2,8 +2,8 @@ import React from 'react'
 import { Card } from '@radix-ui/themes'
 import { Star, MessageCircle, Trophy } from 'lucide-react'
 import fetchUserDetails from '../../hooks/fetchUserDetails'
-const StatsOveriew = () => {
-  const {userDetails} = fetchUserDetails();
+const StatsOveriew = ({userDetails}) => {
+
  
   return (
     <>
