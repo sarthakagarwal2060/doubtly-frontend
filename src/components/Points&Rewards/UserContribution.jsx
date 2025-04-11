@@ -2,8 +2,8 @@ import React from 'react'
 import { Card } from '@radix-ui/themes'
 import { CheckCircle, ThumbsUp } from 'lucide-react'
 import fetchUserDetails from '../../hooks/fetchUserDetails'
-const UserContribution = () => {
-    const {userDetails} = fetchUserDetails();
+const UserContribution = ({userDetails}) => {
+ 
   
     
   return (

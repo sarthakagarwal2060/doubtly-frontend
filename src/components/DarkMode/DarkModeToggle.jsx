@@ -1,7 +1,7 @@
 
 import { Sun, Moon } from "lucide-react";
 import { useDarkMode } from "./DarkModeProvider";
-
+import { DarkModeProvider } from "./DarkModeProvider";
 
 function DarkModeToggle() {
   const { currentTheme, toggleTheme } = useDarkMode();
@@ -10,6 +10,7 @@ function DarkModeToggle() {
 
   return (
     <>
+      
       {currentTheme === "dark" ? (
         <Sun className="h-10 w-7 cursor-pointer" onClick={toggleTheme} />
       ) : (
