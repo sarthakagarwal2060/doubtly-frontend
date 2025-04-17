@@ -23,7 +23,7 @@ function useLeaderboard() {
       );
       
       setLeaderboardData(response.data.result);
-      console.log(response.data.result);
+      // console.log(response.data.result);
       
       setLoading(false);
     } catch (err) {

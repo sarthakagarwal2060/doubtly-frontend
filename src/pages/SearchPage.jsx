@@ -7,6 +7,7 @@ import Search from '../components/Search';
 import Loader from '../components/Loader';
 const MemoizedNavBar = React.memo(NavBar);
 const MemoizedSideBar = React.memo(SideBar);
+
 const SearchPage = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);

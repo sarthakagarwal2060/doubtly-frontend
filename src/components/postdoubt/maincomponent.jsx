@@ -83,7 +83,7 @@ export default function MainComponent({
       />
 
       <Box className="mb-6">
-        <Category ref={categoryRef} />
+        <Category ref={categoryRef} defaultValue="0"/>
       </Box>
 
       <Box className="flex justify-end gap-3">
