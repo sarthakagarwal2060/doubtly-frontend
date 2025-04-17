@@ -41,7 +41,7 @@ function Doubts() {
     return (<div><Loader /></div>);
   }
 
-  console.log(myDoubts);
+  // console.log(myDoubts);
   
 
   if(myDoubts){

@@ -41,12 +41,12 @@ function Doubts() {
     return <div><Loader /></div>;
   }
 
-  console.log(allDoubts);
-  allDoubts.forEach
-  ((doubt) => {
-    console.log(doubt.date); // Log the tags array for each doubt
-  } 
-  )
+  // console.log(allDoubts);
+  // allDoubts.forEach
+  // ((doubt) => {
+  //   console.log(doubt.date);
+  // } 
+  // )
 
   
   return (

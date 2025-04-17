@@ -21,6 +21,15 @@ function SolutionModal({ doubt, onClose }) {
     fetchSolutions();
   }, [doubt]);
 
+  const isWithinEditWindow = (solution) => {
+    if (!solution || !solution.date) return false;
+    const creationTime = new Date(solution.date).getTime();
+    const currentTime = new Date().getTime();
+    const timeDifference = currentTime - creationTime;
+    const fiveMinutesInMs = 5 * 60 * 1000;
+    return timeDifference <= fiveMinutesInMs;
+  };
+
   const fetchSolutions = async () => {
     setLoading(true);
     try {
@@ -80,6 +89,10 @@ function SolutionModal({ doubt, onClose }) {
   };
 
   const handleEditSolution = (solution) => {
+    if (!isWithinEditWindow(solution)) {
+      toast.error("You can only edit solutions within 5 minutes of posting");
+      return;
+    }
     setEditing(solution.id);
     setEditText(solution.description);
   };
@@ -119,7 +132,7 @@ function SolutionModal({ doubt, onClose }) {
       }
     } catch (error) {
       if (error.response && error.response.status === 403) {
-        toast.error("You don't have permission to edit this solution");
+        toast.error("Time limit of 5min exceeded");
       } else {
         toast.error("Failed to update solution");
       }
@@ -127,6 +140,10 @@ function SolutionModal({ doubt, onClose }) {
   };
 
   const handleDeleteClick = (solution) => {
+    if (!isWithinEditWindow(solution)) {
+      toast.error("You can only delete solutions within 5 minutes of posting");
+      return;
+    }
     setSolutionToDelete(solution);
     setShowDeleteConfirm(true);
   };
@@ -154,7 +171,7 @@ function SolutionModal({ doubt, onClose }) {
       }
     } catch (error) {
       if (error.response && error.response.status === 403) {
-        toast.error("You don't have permission to delete this solution");
+        toast.error("Time limit of 5min exceeded");
       } else {
         toast.error("Failed to delete solution");
       }
@@ -269,8 +286,16 @@ function SolutionModal({ doubt, onClose }) {
                                 variant="ghost" 
                                 size="1"
                                 onClick={() => handleEditSolution(solution)}
-                                className="text-gray-500 hover:text-blue-500"
-                                title="Edit solution"
+                                className={`text-gray-500 ${
+                                  isWithinEditWindow(solution) 
+                                    ? "hover:text-blue-500" 
+                                    : "opacity-50 cursor-not-allowed"
+                                }`}
+                                title={
+                                  isWithinEditWindow(solution)
+                                    ? "Edit solution"
+                                    : "Can only edit within 5 minutes of posting"
+                                }
                               >
                                 <Edit2 size={14} />
                               </Button>
@@ -278,8 +303,16 @@ function SolutionModal({ doubt, onClose }) {
                                 variant="ghost" 
                                 size="1"
                                 onClick={() => handleDeleteClick(solution)}
-                                className="text-gray-500 hover:text-red-500"
-                                title="Delete solution"
+                                className={`text-gray-500 ${
+                                  isWithinEditWindow(solution) 
+                                    ? "hover:text-red-500" 
+                                    : "opacity-50 cursor-not-allowed"
+                                }`}
+                                title={
+                                  isWithinEditWindow(solution)
+                                    ? "Delete solution"
+                                    : "Can only delete within 5 minutes of posting"
+                                }
                               >
                                 <Trash2 size={14} />
                               </Button>
