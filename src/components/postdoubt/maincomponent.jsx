@@ -35,10 +35,11 @@ export default function MainComponent({
       
       if (response?.status === 200) {
         toast.success("Doubt posted successfully!");
-        navigate("/dashboard");
+        navigate(-1);
       } else {
         toast.error("Failed to post doubt. Please try again.");
       }
+       navigate(-1);
     } catch (error) {
       console.error("Error in form submission:", error);
       if (error.response?.status === 401) {

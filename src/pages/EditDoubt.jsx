@@ -80,7 +80,8 @@ function EditDoubt() {
 
       if (response.status === 200) {
         toast.success("Doubt updated successfully!");
-        navigate("/dashboard/mydoubts");
+         navigate(-1);
+
       }
     } catch (error) {
       if (error.response?.status === 401) {
@@ -88,6 +89,7 @@ function EditDoubt() {
         navigate("/login");
       } else {
         toast.error("Failed to update doubt");
+         navigate(-1);
       }
     }
   };
