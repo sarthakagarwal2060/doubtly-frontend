@@ -22,12 +22,12 @@ import Points from "./pages/Points";
 import SearchPage from "./pages/SearchPage";
 import { useEffect, useState ,useRef } from "react";
 import { useDarkMode } from "./components/DarkMode/DarkModeProvider";
+import EditDoubt from "./pages/EditDoubt";
 
 
 function App() {
      const { currentTheme} = useDarkMode();  
   return (
- 
     <>
       <Routes>
         <Route
@@ -126,15 +126,22 @@ function App() {
             </ProtectedRoute>
           }
         />
-         <Route
+        <Route
           path="/dashboard/points"
           element={
             <ProtectedRoute>
-              <Points/>
+              <Points />
             </ProtectedRoute>
           }
         />
-     
+        <Route
+         path="/dashboard/doubt/:doubtId/edit" 
+         element={
+          <ProtectedRoute>
+            <EditDoubt/>
+          </ProtectedRoute>
+         }
+         />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -148,8 +155,7 @@ function App() {
         pauseOnFocusLoss={false}
         draggable={false}
         pauseOnHover={false}
-    
-        key={currentTheme} 
+        key={currentTheme}
         theme={currentTheme}
       />
     </>
