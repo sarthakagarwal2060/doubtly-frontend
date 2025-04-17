@@ -42,22 +42,22 @@ function Team() {
   ];
 
   return (
-    <>
-      <NavBar doubtly={true} login={true} />
-      
-      <div className="py-20 md:py-20 flex flex-col items-center justify-center bg-[#F7F9FA]">
-
-        <h1 className="text-5xl font-bold text-center mb-4">Meet Our Team</h1>
+    <div className="bg-[#F7F9FA] dark:text-black">
+     
+     <NavBar doubtly={true} login={true} />
+      <div className="py-20 md:py-20 flex flex-col items-center justify-center bg-[#F7F9FA] dark:text-black">
+    
+        <h1 className="text-5xl font-bold text-center mb-4 dark:text-black">Meet Our Team</h1>
         <div className="py-20 md:py-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {teamMembers.map((member) => (
               <Card key={member.name} className="transform hover:scale-105 transition-all duration-300">
-                <div className="flex flex-col items-center p-8 gap-4 rounded-xl bg-white dark:bg-gray-800 border-0">
+                <div className="flex flex-col items-center p-8 gap-4 rounded-xl bg-white  border-0">
                   <div className="mb-6">
                     <img
                       src={member.image || fallbackImage}
                       alt={member.name}
-                      className="w-60 h-60 rounded-full object-cover shadow-lg border-4 border-white dark:border-gray-700"
+                      className="w-60 h-60 rounded-full object-cover shadow-lg border-4 border-white "
                     />
                   </div>
                   <div className="text-center">
@@ -68,7 +68,7 @@ function Team() {
                     <div className="flex justify-center gap-6 mt-8">
                       <div className="flex items-center justify-center gap-1">
                         <Github size="18"/>
-                        <button className="bg-[#]"><Link to={member.github} target="blank">GitHub</Link></button>
+                        <button className="bg-[#] "><Link to={member.github} target="blank">GitHub</Link></button>
                       </div>
                       <div className="flex items-center justify-center gap-1">
                         <Linkedin size="18"/>
@@ -82,7 +82,7 @@ function Team() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

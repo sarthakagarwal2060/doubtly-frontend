@@ -21,7 +21,7 @@ function Landing() {
             </Button>
         </div>
       </div>  */}
-      <div className="bg-white text-black">
+      <div className="bg-white text-black  dark:bg-white dark:text-black">
       <NavBar doubtly={true} login={true}/>
       <Section1 />
       <Section2 />

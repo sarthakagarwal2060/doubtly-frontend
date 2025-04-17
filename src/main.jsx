@@ -7,11 +7,14 @@ import { DarkModeProvider } from "./components/DarkMode/DarkModeProvider.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-    <DarkModeProvider>
+  
     <Theme>
+    <DarkModeProvider>
       <App />
+      </DarkModeProvider>
     </Theme>
-   </DarkModeProvider>
+
+
  
     </BrowserRouter>
   </StrictMode>
