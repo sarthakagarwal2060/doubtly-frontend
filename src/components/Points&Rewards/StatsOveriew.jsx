@@ -3,7 +3,7 @@ import { Card } from '@radix-ui/themes'
 import { Star, MessageCircle, Trophy } from 'lucide-react'
 import fetchUserDetails from '../../hooks/fetchUserDetails'
 const StatsOveriew = ({userDetails}) => {
-
+console.log(userDetails)
  
   return (
     <>
@@ -17,7 +17,7 @@ const StatsOveriew = ({userDetails}) => {
          Total Points
         </h2>
         <p className="text-2xl font-bold text-black dark:text-white mt-1">
-        {userDetails.upvotes}
+        {userDetails.points}
         </p>
       </Card>
 
@@ -29,7 +29,7 @@ const StatsOveriew = ({userDetails}) => {
            Doubts Solved
         </h2>
         <p className="text-2xl font-bold text-black dark:text-white mt-1">
-        {userDetails.points}
+        {userDetails.answersGiven}
         </p>
       </Card>
 

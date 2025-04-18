@@ -20,7 +20,7 @@ const UserContribution = ({userDetails}) => {
              { userDetails.correctlyAnswered}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-          {userDetails.correctlyAnswered} points earned
+          {userDetails.correctlyAnswered*50} points earned
           </p>
         </Card>
 
